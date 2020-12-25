@@ -1,0 +1,123 @@
+.main-page{
+    background: url('./Assets/background.jpg') no-repeat;
+    background-size: cover;
+    height: 770px;
+    min-height: 680px;
+    background-position: center;
+    background-color: #2d3238;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ask-logo{
+    width: 120px;
+    height: auto;
+    display: block;
+}
+
+.main-page h1 {
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    font-weight: 400;
+}
+
+.main-page strong {
+    font-weight: 600;
+}
+
+.main-page button{
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 36px;
+    width: 300px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 4px;
+    padding: 0;
+}
+.register-button{
+    color: #2d3238;
+}
+.login-button{
+    background-color: #2d3238;
+    color: white;
+}
+.top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20vh;
+}
+.stores{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+}
+
+.store{
+height: 45px;
+margin: 0 2.5px;
+}
+
+.main-page-footer {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1080px;
+}
+.main-page-footer ul{
+    display: flex;
+    justify-content: space-between;
+}
+.main-page-footer ul li {
+    list-style-type: none;
+    display: flex;
+    margin: 0 2.5px;
+}
+
+.main-page-footer ul li a {
+    text-decoration: none;
+    color: #2d3238;
+    transition: 500ms;
+}
+
+.main-page-footer ul li a:hover {
+    color: #d30e3c;
+}
+
+.main-page-footer hr {
+    border-top: 1px solid;
+    width: 100%;
+}
+
+.languages-socials{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #b2b2bb;
+    font-size: 10px;
+}
+
+.language span span {
+    font-weight: 500;
+    color:black
+}
+
+.socials {
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-logo{
+    height: 16px;
+    width: auto;
+    fill: #b2b2bb;
+    margin: 0 2px;
+}
