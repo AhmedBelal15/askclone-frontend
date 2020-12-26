@@ -8,6 +8,7 @@ import {ReactComponent as FacebookLogo} from './Assets/social-icons/facebook.svg
 import {ReactComponent as GithubLogo} from './Assets/social-icons/github.svg'
 import {ReactComponent as InstagramLogo} from './Assets/social-icons/instagram.svg'
 import {ReactComponent as TwitterLogo} from './Assets/social-icons/twitter.svg'
+import {Link} from 'react-router-dom'
 import "./main-page.style.css";
 const MainPage = () => {
   return (
@@ -20,7 +21,7 @@ const MainPage = () => {
             <strong>Openly or anonymously.</strong>{" "}
           </h1>
           <button className="register-button">Register</button>
-          <button className="login-button">Login</button>
+        <Link to='/login'><button className="login-button">Login</button></Link> 
         </div>
         <div className="stores">
           <img src={AppStore} alt="App Store" className="store" />
