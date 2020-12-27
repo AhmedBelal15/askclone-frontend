@@ -1,4 +1,4 @@
-.login-page{
+.login-register-page{
     background-color: #2b3237;
     height: 100vh;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.login-nav{
+.login-register-nav{
     background: #2b3237;
     width: 100%;
     height: 50px;
@@ -17,23 +17,23 @@
     z-index: 3;
 }
 
-.login-nav img {
+.login-register-nav img {
     height: 50%;
 }
 
-.login-form{
+.login-register-form{
     margin-top: 1vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 38vh;
-    width: 21vw;
+    height: 360px;
+    width: 360px;
     background: white;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
-.login-form h1{
+.login-register-form h1{
     font-size: 28px;
     text-align: left;
     font-weight: 600;
@@ -42,13 +42,13 @@
     margin: 0px;
 }
 
-.login-form h2{ 
+.login-register-form h2{ 
      font-size: 12px; 
     text-align: left;
     font-weight: 400;
     color: #2b3237;
 } 
-.login-form h2 span {
+.login-register-form h2 span {
     color: #ee1144;
 }
 
@@ -78,7 +78,7 @@
     color: #ee1144;
 }
 
-.login-form button {
+.login-register-form button {
     height: 40px;
     padding: 0px;
     border: none;

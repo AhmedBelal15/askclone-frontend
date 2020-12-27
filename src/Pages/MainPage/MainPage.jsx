@@ -1,16 +1,17 @@
 import React from "react";
-import logo from "./Assets/ask-logo.png";
-import AppStore from "./Assets/app-store.png";
-import GooglePlay from "./Assets/google-play.png";
-import AppGallery from "./Assets/app-gallery.png";
-import {ReactComponent as AskLogo} from './Assets/social-icons/askfm.svg'
-import {ReactComponent as FacebookLogo} from './Assets/social-icons/facebook.svg'
-import {ReactComponent as GithubLogo} from './Assets/social-icons/github.svg'
-import {ReactComponent as InstagramLogo} from './Assets/social-icons/instagram.svg'
-import {ReactComponent as TwitterLogo} from './Assets/social-icons/twitter.svg'
-import {Link} from 'react-router-dom'
+import logo from "../../Assets/ask-logo.png";
+import AppStore from "../../Assets/app-store.png";
+import GooglePlay from "../../Assets/google-play.png";
+import AppGallery from "../../Assets/app-gallery.png";
+import { ReactComponent as AskLogo } from "../../Assets/social-icons/askfm.svg";
+import { ReactComponent as FacebookLogo } from "../../Assets/social-icons/facebook.svg";
+import { ReactComponent as GithubLogo } from "../../Assets/social-icons/github.svg";
+import { ReactComponent as InstagramLogo } from "../../Assets/social-icons/instagram.svg";
+import { ReactComponent as TwitterLogo } from "../../Assets/social-icons/twitter.svg";
+import { Link } from "react-router-dom";
 import "./main-page.style.css";
 const MainPage = () => {
+  document.title='Ask FM'
   return (
     <React.Fragment>
       <div className="main-page">
@@ -20,8 +21,12 @@ const MainPage = () => {
             Curious? <strong> Just ask! </strong> <br />{" "}
             <strong>Openly or anonymously.</strong>{" "}
           </h1>
-          <button className="register-button">Register</button>
-        <Link to='/login'><button className="login-button">Login</button></Link> 
+          <Link to="/register">
+            <button className="register-button">Register</button>
+          </Link>
+          <Link to="/login">
+            <button className="login-button">Login</button>
+          </Link>
         </div>
         <div className="stores">
           <img src={AppStore} alt="App Store" className="store" />
@@ -63,14 +68,16 @@ const MainPage = () => {
         <hr />
         <div className="languages-socials">
           <div className="language">
-            <span>Language: <span>English</span> </span>
+            <span>
+              Language: <span>English</span>{" "}
+            </span>
           </div>
           <div className="socials">
-         <AskLogo className='social-logo' />
-         <FacebookLogo className='social-logo' />
-         <InstagramLogo className='social-logo' />
-         <GithubLogo className='social-logo' />
-         <TwitterLogo className='social-logo' />
+            <AskLogo className="social-logo" />
+            <FacebookLogo className="social-logo" />
+            <InstagramLogo className="social-logo" />
+            <GithubLogo className="social-logo" />
+            <TwitterLogo className="social-logo" />
           </div>
         </div>
       </footer>
