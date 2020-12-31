@@ -1,0 +1,11 @@
+.login-register-nav a {
+    height: 50%;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.login-register-nav img {
+    height: 100%;
+
+}

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./forgot-password-page.style.css";
-import logo from "../../Assets/ask-logo.png";
-
+import LoginRegisterNav from "../../Components/Nav/LoginRegisterNav.Component";
 const ForgotPasswordPage = () => {
-    document.title='Forgot Password'
+  document.title = "Forgot Password";
   const [values, setValues] = useState({
     email: "",
   });
@@ -14,10 +13,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="login-register-page">
-      <div className="login-register-nav">
-        <img src={logo} alt="ask logo" />
-      </div>
-
+      <LoginRegisterNav />
       <form className="login-register-form forgot-form" onSubmit={handleSubmit}>
         <div>
           <h1>Password recovery</h1>

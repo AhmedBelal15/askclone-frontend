@@ -1,34 +1,49 @@
 import { useState } from "react";
-import logo from "../../Assets/ask-logo.png";
-import {Link} from 'react-router-dom'
-import './register-page.style.css'
+import LoginRegisterNav from "../../Components/Nav/LoginRegisterNav.Component";
+import { Link } from "react-router-dom";
+import "./register-page.style.css";
 const RegisterPage = () => {
-  document.title='Register'
-const handleSubmit = (e) => {
-  e.preventDefault()
-  if(values.password !== values.confirmPassword){
-    return alert('Please make sure that passwords are identical!')
-  }
-  console.log(values);
-}
-const [values, setValues] = useState({
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
-})
+  document.title = "Register";
+
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (values.password !== values.confirmPassword) {
+      return alert("Please make sure that passwords are identical!");
+    }
+
+    const response = await fetch("http://localhost:4000/register", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: values.username,
+        email: values.email.toLocaleLowerCase(),
+        password: values.password,
+        confirmPassword: values.confirmPassword
+      }),
+    });
+    const data = await response.json();
+    alert(data)
+  };
 
   return (
     <div className="login-register-page">
-        <div className="login-register-nav">
-        <img src={logo} alt="ask logo" />
-      </div>
-      <form className="login-register-form register-form" onSubmit={handleSubmit}>
+      <LoginRegisterNav />
+      <form
+        className="login-register-form register-form"
+        onSubmit={handleSubmit}
+      >
         <div>
           <h1>Register</h1>
           <h2>
-          Already have an account? {" "}
-            <Link style={{ textDecoration: 'none' }} to="/login">
+            Already have an account?{" "}
+            <Link style={{ textDecoration: "none" }} to="/login">
               <span>Login</span>
             </Link>
           </h2>
@@ -40,9 +55,11 @@ const [values, setValues] = useState({
             name="userName"
             placeholder="Username"
             required
-            maxLength='60'
+            maxLength="60"
             value={values.username}
-            onChange={(e)=>{setValues({...values, username: e.target.value})}}
+            onChange={(e) => {
+              setValues({ ...values, username: e.target.value });
+            }}
           />
         </div>
         <div className="form-element">
@@ -52,8 +69,11 @@ const [values, setValues] = useState({
             name="email"
             placeholder="Email"
             required
+            maxLength="255"
             value={values.email}
-            onChange={(e)=>{setValues({...values, email: e.target.value})}}
+            onChange={(e) => {
+              setValues({ ...values, email: e.target.value });
+            }}
           />
         </div>
         <div className="form-element">
@@ -63,10 +83,12 @@ const [values, setValues] = useState({
             name="password"
             placeholder="Password"
             required
-            minLength = '6'
-            maxLength = '255'
+            minLength="6"
+            maxLength="255"
             value={values.password}
-            onChange={(e)=>{setValues({...values, password: e.target.value})}}
+            onChange={(e) => {
+              setValues({ ...values, password: e.target.value });
+            }}
           />
         </div>
         <div className="form-element">
@@ -77,7 +99,9 @@ const [values, setValues] = useState({
             placeholder="Confirm password"
             required
             value={values.confirmPassword}
-            onChange={(e)=>{setValues({...values, confirmPassword: e.target.value})}}
+            onChange={(e) => {
+              setValues({ ...values, confirmPassword: e.target.value });
+            }}
           />
         </div>
         <button type="submit">Register</button>
