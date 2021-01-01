@@ -1,0 +1,21 @@
+.login-register-nav{
+    background: #2b3237;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.5px solid #1a1e21;
+}
+
+.login-register-nav a {
+    height: 50%;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.login-register-nav img {
+    height: 100%;
+
+}

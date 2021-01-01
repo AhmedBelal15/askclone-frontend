@@ -1,0 +1,46 @@
+.add-question-form {
+    width: 500px;
+    height: 150px;
+    background: #1e2326;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-question-input-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.add-question-input{
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+}
+
+.add-question-button-container{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 8px;
+    color: white;
+}
+
+.add-question-button-container span {
+    margin-right: 5px;
+}
+
+.add-question-buton{
+    width: 100px;
+    height: 40px;
+    border: none;
+    padding: 0px;
+    background-color: #ee1144;
+    color: white;
+    font-weight: 900;
+}

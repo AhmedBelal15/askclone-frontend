@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./login-page.style.css";
-import LoginRegisterNav from '../../Components/Nav/LoginRegisterNav.Component'
+import LoginRegisterNav from '../../Components/LoginRegisterNav/LoginRegisterNav.Component'
 
 const LoginPage = () => {
   document.title = "Login";

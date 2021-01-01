@@ -1,0 +1,31 @@
+.home-page-nav{
+    background: #2b3237;
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.5px solid #1a1e21;
+}
+
+.home-page-nav a {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-icons-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 300px;
+}
+
+
+.nav-icon {
+    height: 30px;
+    width: auto;
+    color: gray;
+    fill: currentColor;
+    margin: 3px;
+}

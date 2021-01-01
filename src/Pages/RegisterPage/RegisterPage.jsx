@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoginRegisterNav from "../../Components/Nav/LoginRegisterNav.Component";
+import LoginRegisterNav from '../../Components/LoginRegisterNav/LoginRegisterNav.Component'
 import { Link } from "react-router-dom";
 import "./register-page.style.css";
 const RegisterPage = () => {

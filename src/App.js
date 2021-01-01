@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
+import HomePage from "./Pages/HomePage/HomePage";
 function App() {
   return (
     <Router>
@@ -11,6 +12,7 @@ function App() {
       <Route exact path='/login' component={LoginPage} title='Login' />
       <Route exact path='/register' component={RegisterPage} />
       <Route exact path='/forgot-password' component={ForgotPasswordPage} />
+      <Route exact path='/home' component={HomePage} />
     </Router>
   );
 }
