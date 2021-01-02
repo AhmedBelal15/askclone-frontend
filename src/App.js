@@ -5,6 +5,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
 import HomePage from "./Pages/HomePage/HomePage";
+import NewPasswordPage from "./Pages/NewPasswordPage/NewPasswordPage";
 function App() {
   return (
     <Router>
@@ -13,6 +14,7 @@ function App() {
       <Route exact path='/register' component={RegisterPage} />
       <Route exact path='/forgot-password' component={ForgotPasswordPage} />
       <Route exact path='/home' component={HomePage} />
+      <Route  path='/updatepassword/:resetToken' component={NewPasswordPage} />
     </Router>
   );
 }

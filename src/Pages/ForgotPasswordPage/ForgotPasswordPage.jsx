@@ -6,9 +6,17 @@ const ForgotPasswordPage = () => {
   const [values, setValues] = useState({
     email: "",
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(values);
+    const response = await fetch('http://localhost:4000/forgotpassword', {
+      method: 'post',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        email: values.email
+      })
+    })
+    const data = await response.json()
+    alert(data)
   };
 
   return (
