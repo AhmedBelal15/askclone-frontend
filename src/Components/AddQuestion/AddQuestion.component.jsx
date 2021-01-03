@@ -12,7 +12,10 @@ const AddQuestion = () => {
     setQuestion('')
   }
   return (
-    <form className="add-question-form" onSubmit={handleSubmit}>
+    <form className="add-question-form" 
+    onSubmit={handleSubmit}
+    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+    >
       <div className="add-question-input-container">
         <input type="textarea" className="add-question-input" value={question} onChange={(e)=> setQuestion(e.target.value)} />
       </div>

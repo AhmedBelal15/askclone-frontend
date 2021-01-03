@@ -10,9 +10,19 @@ const LoginPage = () => {
     password: "",
     rememberMe: false,
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(values);
+    const response = await fetch('http://localhost:4000/login', {
+      method: 'post',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+        rememberMe: values.rememberMe
+      })
+    })
+    const data = await response.json()
+    console.log(data);
   };
 
   return (
