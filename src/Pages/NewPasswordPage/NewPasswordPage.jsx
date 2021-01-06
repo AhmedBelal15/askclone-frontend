@@ -13,7 +13,7 @@ const NewPasswordPage = () => {
 const handleSubmit = async(e) => {
     e.preventDefault()
     if(values.password !== values.confirmPassword){return alert("Passwords don't match")}
-    const response = await fetch(`http://localhost:4000/updatepassword/${resetToken}`, {
+    const response = await fetch(`http://localhost:4000/auth/updatepassword/${resetToken}`, {
         method: 'put',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

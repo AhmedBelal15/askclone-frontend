@@ -6,12 +6,14 @@ import './home-page.style.css'
 const HomePage = () => {
 
     return(
-        <div className='home-page'>
+        <>
             <HomePageNav />
+        <div className='home-page'>
             <AddQuestion />
             <div style={{height: '50px'}}></div>
             <AnswerModel />
         </div>
+        </>
     );
 }
 

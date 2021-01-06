@@ -9,7 +9,7 @@ document.title('Email Verification')
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/verifyemail/${verifyToken}`,
+        `http://localhost:4000/auth/verifyemail/${verifyToken}`,
         {
           method: "put",
           headers: {

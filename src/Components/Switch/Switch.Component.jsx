@@ -1,6 +1,6 @@
 import './switch.style.css'
 
-const Switch = () => {
+const Switch = ({isAnonymous, setIsAnonymous}) => {
   return (
     <div className="toggle-switch">
       <input
@@ -8,6 +8,8 @@ const Switch = () => {
         className="toggle-switch-checkbox"
         name="toggleSwitch"
         id="toggleSwitch"
+        value={isAnonymous}
+        onChange={()=>setIsAnonymous(!isAnonymous)}
       />
       <label className="toggle-switch-label" htmlFor="toggleSwitch">
         <span className="toggle-switch-inner" />

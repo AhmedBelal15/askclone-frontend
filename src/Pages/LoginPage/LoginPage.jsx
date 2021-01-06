@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./login-page.style.css";
 import LoginRegisterNav from '../../Components/LoginRegisterNav/LoginRegisterNav.Component'
 
-const LoginPage = () => {
+const LoginPage = ({setLogin}) => {
   document.title = "Login";
   const [values, setValues] = useState({
     email: "",
@@ -12,7 +12,7 @@ const LoginPage = () => {
   });
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/login', {
+    const response = await fetch('http://localhost:4000/auth/login', {
       method: 'post',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -22,7 +22,13 @@ const LoginPage = () => {
       })
     })
     const data = await response.json()
-    console.log(data);
+    if(data[0] === 'logged in'){
+      localStorage.setItem('user', JSON.stringify(data))
+      localStorage.setItem('loggedIn', 'true')
+      setLogin(true)
+    } else {
+      alert(data)
+    }
   };
 
   return (
