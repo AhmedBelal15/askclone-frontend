@@ -1,0 +1,43 @@
+.question-model {
+  min-height: 70px;
+  width: 480px;
+  padding: 5px 10px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.question-top {
+  display: grid;
+  grid-template-columns: 0.08fr 1fr;
+  grid-template-rows: 0.05fr 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.delete-icon {
+  padding-top: 15px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  fill: red;
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.question {
+  grid-area: 2 / 2 / 3 / 3;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.question-bottom button{
+    background: none;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ee1144;
+}

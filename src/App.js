@@ -9,6 +9,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import NewPasswordPage from "./Pages/NewPasswordPage/NewPasswordPage";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
 function App() {
   //handle app sign in
   const [login, setLogin] = useState(false);
@@ -69,6 +70,13 @@ function App() {
         path="/profile"
         render={() => (!login ? <Redirect to="/login" /> : <ProfilePage />)}
       />
+
+      <Route
+        exact
+        path="/questions"
+        render={() => (!login ? <Redirect to="/login" /> : <QuestionsPage />)}
+      />
+
     </Router>
   );
 }
