@@ -1,0 +1,16 @@
+.no-data-card{
+    width: 480px;
+    padding: 5 10;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.no-data-card p{
+    font-size: 20px;
+    font-weight: bold;
+}

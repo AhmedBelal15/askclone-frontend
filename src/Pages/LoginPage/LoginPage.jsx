@@ -23,7 +23,7 @@ const LoginPage = ({setLogin}) => {
     })
     const data = await response.json()
     if(data[0] === 'logged in'){
-      localStorage.setItem('user', JSON.stringify(data))
+      localStorage.setItem('user', JSON.stringify(data[1]))
       localStorage.setItem('loggedIn', 'true')
       setLogin(true)
     } else {

@@ -1,16 +1,62 @@
+import { useEffect, useState } from "react";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
+import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import QuestionModel from "../../Components/QuestionModel/QuestionModel.Component";
 import "./questions-page.style.css";
 
 const QuestionsPage = () => {
+  const [questions, setQuestions] = useState([]);
+  const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
+  const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:4000/questions/deletequestion/${id}`, {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      });
+      const newQuestions = questions.filter(question=> question.question_id !== id)
+      setQuestions(newQuestions)
+    } catch (error) {alert('error')}
+  };
+  useEffect(() => {
+    (async function () {
+      const response = await fetch(
+        "http://localhost:4000/questions/getquestions",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = await response.json();
+      setQuestions([...data]);
+    })();
+  }, []);
   return (
     <>
       <HomePageNav />
       <div className="questions-page-container">
-        <QuestionModel />
-        <QuestionModel />
-        <QuestionModel />
-
+      {questions.length === 0 ? <NoDataCard data={'Questions'} />: null}
+        {questions.map((question) => {
+          return (
+            <div key={question.question_id}>
+              <QuestionModel
+                isAnonymous={question.is_anonymous}
+                recieverId={question.reciever_id}
+                question={question.question}
+                date={question.asked_date}
+                handleDelete={()=> handleDelete(question.question_id)}
+              />
+            </div>
+          );
+        })}
       </div>
     </>
   );

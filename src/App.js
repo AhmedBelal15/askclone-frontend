@@ -10,6 +10,7 @@ import NewPasswordPage from "./Pages/NewPasswordPage/NewPasswordPage";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
+import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 function App() {
   //handle app sign in
   const [login, setLogin] = useState(false);
@@ -75,6 +76,12 @@ function App() {
         exact
         path="/questions"
         render={() => (!login ? <Redirect to="/login" /> : <QuestionsPage />)}
+      />
+
+      <Route
+        exact
+        path="/answerquestion/:questionid"
+        render={() => (!login ? <Redirect to="/login" /> : <AddAnswerPage />)}
       />
 
     </Router>
