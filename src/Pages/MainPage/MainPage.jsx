@@ -9,10 +9,17 @@ import { ReactComponent as GithubLogo } from "../../Assets/social-icons/github.s
 import { ReactComponent as InstagramLogo } from "../../Assets/social-icons/instagram.svg";
 import { ReactComponent as TwitterLogo } from "../../Assets/social-icons/twitter.svg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "./main-page.style.css";
 const MainPage = () => {
   return (
     <React.Fragment>
+      <div className="application">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Home Page</title>
+        </Helmet>
+      </div>
       <div className="main-page">
         <div className="top">
           <img src={logo} alt="Ask fm Logo" className="ask-logo" />

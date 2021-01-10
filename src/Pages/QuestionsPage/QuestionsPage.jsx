@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import QuestionModel from "../../Components/QuestionModel/QuestionModel.Component";
+import { Helmet } from "react-helmet";
 import "./questions-page.style.css";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
   const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  //handle delete function
   const handleDelete = async (id) => {
     try {
       await fetch(`http://localhost:4000/questions/deletequestion/${id}`, {
@@ -26,6 +28,8 @@ const QuestionsPage = () => {
       alert("error");
     }
   };
+
+  //fetching user questions
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -40,12 +44,19 @@ const QuestionsPage = () => {
         }
       );
       const data = await response.json();
+      console.log(data);
       setQuestions([...data]);
     })();
     // eslint-disable-next-line
   }, []);
   return (
     <>
+      <div className="application">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Questions</title>
+        </Helmet>
+      </div>
       <HomePageNav />
       <div className="questions-page-container">
         {questions.length === 0 ? <NoDataCard data={"Questions"} /> : null}

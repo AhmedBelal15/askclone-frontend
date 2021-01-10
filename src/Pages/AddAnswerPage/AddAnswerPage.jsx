@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import AddAnswerModel from "../../Components/AddAnswerModel/AddAnswerModel.component";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import "./add-answer-page.style.css";
@@ -27,14 +28,13 @@ const AddAnswerPage = () => {
         }
       );
       const data = await response.json();
-     
+
       setQuestionData({
         question: data.question,
         isAnonymous: data.isAnonymous,
       });
     })();
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ const AddAnswerPage = () => {
           "refresh-token": refreshToken,
         },
         body: JSON.stringify({
-          answer
+          answer,
         }),
       }
     );
@@ -58,14 +58,20 @@ const AddAnswerPage = () => {
 
   return (
     <>
+      <div className="application">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Add Answer</title>
+        </Helmet>
+      </div>
       <HomePageNav />
       <div className="add-answer-container">
         <AddAnswerModel
           handleSubmit={handleSubmit}
           answer={answer}
           setAnswer={setAnswer}
-          question = {questionData.question}
-          isAnonymous = {questionData.isAnonymous}
+          question={questionData.question}
+          isAnonymous={questionData.isAnonymous}
         />
       </div>
     </>

@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
 import { useParams } from "react-router-dom";
-import NoDataCard from '../../Components/NoDataCard/NoDataCard.component'
+import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
+import { Helmet } from "react-helmet";
 import "../ProfilePage/profile-page.style.css";
 
 const UserPage = () => {
@@ -56,14 +57,18 @@ const UserPage = () => {
         }
       );
       const data = await response.json();
-      if(data[0]==='error')return
+      if (data[0] === "error") return;
       setAnswers(data);
     })();
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{'placeholder'} profile</title>
+      </Helmet>
       <HomePageNav />
       <div className="profile-page-container">
         <AddQuestion
@@ -73,17 +78,21 @@ const UserPage = () => {
           isAnonymous={isAnonymous}
           setIsAnonymous={setIsAnonymous}
         />
-        {(answers.length !== 0) ? answers.map((answer) => {
-          return (
-            <div key={answer.question_id}>
-              <AnswerModel
-                question={answer.question}
-                askedDate={answer.answered_date}
-                answer={answer.answer}
-              />
-            </div>
-          );
-        }): <NoDataCard data = {'answers'} />}
+        {answers.length !== 0 ? (
+          answers.map((answer) => {
+            return (
+              <div key={answer.question_id}>
+                <AnswerModel
+                  question={answer.question}
+                  askedDate={answer.answered_date}
+                  answer={answer.answer}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <NoDataCard data={"answers"} />
+        )}
       </div>
     </>
   );
