@@ -7,6 +7,7 @@
     align-items: center;
     border-bottom: 0.5px solid #1a1e21;
     position: fixed;
+    z-index: 1000;
 }
 
 .home-page-nav a {

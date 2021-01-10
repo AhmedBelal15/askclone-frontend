@@ -5,11 +5,13 @@ import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx"
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
 import "./profile-page.style.css";
+import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
 
 const ProfilePage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
+  const [image, setImage] = useState('https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg')
   const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
   const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
 
@@ -66,6 +68,7 @@ const ProfilePage = () => {
       </div>
       <HomePageNav />
       <div className="profile-page-container">
+      <ProfileBoxHeader image={image} />
         <AddQuestion
           question={question}
           setQuestion={setQuestion}
