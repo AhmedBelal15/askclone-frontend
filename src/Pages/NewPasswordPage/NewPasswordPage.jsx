@@ -4,7 +4,6 @@ import LoginRegisterNav from "../../Components/LoginRegisterNav/LoginRegisterNav
 import "./new-password-page.style.css";
 
 const NewPasswordPage = () => {
-  document.title('Update Password')
   const [values, setValues] = useState({
     password: "",
     confirmPassword: "",

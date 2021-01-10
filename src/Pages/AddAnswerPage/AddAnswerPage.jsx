@@ -34,10 +34,10 @@ const AddAnswerPage = () => {
       });
     })();
   }, []);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
-    const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
     const response = await fetch(
       `http://localhost:4000/questions/addanswer/${questionId}`,
       {
@@ -48,8 +48,7 @@ const AddAnswerPage = () => {
           "refresh-token": refreshToken,
         },
         body: JSON.stringify({
-          questionId: answer,
-          answer: questionId,
+          answer
         }),
       }
     );

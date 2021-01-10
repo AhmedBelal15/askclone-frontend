@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import LoginRegisterNav from "../../Components/LoginRegisterNav/LoginRegisterNav.Component";
 import './verify-email.style.css'
 const VerifyEmail = () => {
-document.title('Email Verification')
   const [content, setContent] = useState("");
   const { verifyToken } = useParams();
   useEffect(() => {
@@ -20,6 +19,7 @@ document.title('Email Verification')
       const data = await response.json();
       setContent(data);
     })();
+// eslint-disable-next-line
   }, []);
 
   return (

@@ -11,7 +11,6 @@ import { ReactComponent as TwitterLogo } from "../../Assets/social-icons/twitter
 import { Link } from "react-router-dom";
 import "./main-page.style.css";
 const MainPage = () => {
-  document.title='Ask FM'
   return (
     <React.Fragment>
       <div className="main-page">

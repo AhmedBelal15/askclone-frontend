@@ -1,10 +1,8 @@
 import { useState } from "react";
-import LoginRegisterNav from '../../Components/LoginRegisterNav/LoginRegisterNav.Component'
+import LoginRegisterNav from "../../Components/LoginRegisterNav/LoginRegisterNav.Component";
 import { Link } from "react-router-dom";
 import "./register-page.style.css";
 const RegisterPage = () => {
-  document.title = "Register";
-
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -25,11 +23,11 @@ const RegisterPage = () => {
         username: values.username,
         email: values.email.toLocaleLowerCase(),
         password: values.password,
-        confirmPassword: values.confirmPassword
+        confirmPassword: values.confirmPassword,
       }),
     });
     const data = await response.json();
-    alert(data)
+    alert(data);
   };
 
   return (

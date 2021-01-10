@@ -4,7 +4,6 @@ import "./login-page.style.css";
 import LoginRegisterNav from '../../Components/LoginRegisterNav/LoginRegisterNav.Component'
 
 const LoginPage = ({setLogin}) => {
-  document.title = "Login";
   const [values, setValues] = useState({
     email: "",
     password: "",

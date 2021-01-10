@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./forgot-password-page.style.css";
 import LoginRegisterNav from "../../Components/LoginRegisterNav/LoginRegisterNav.Component";
 const ForgotPasswordPage = () => {
-  document.title = "Forgot Password";
   const [values, setValues] = useState({
     email: "",
   });

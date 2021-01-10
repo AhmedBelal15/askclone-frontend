@@ -1,19 +1,38 @@
 import AddQuestion from "../../Components/AddQuestion/AddQuestion.component.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
+import NoDataCard from '../../Components/NoDataCard/NoDataCard.component'
 import "./profile-page.style.css";
 
 const ProfilePage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [answers, setAnswers] = useState([])
   const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
   const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
 
+  useEffect(()=>{
+    (async function(){
+      const response = await fetch('http://localhost:4000/questions/getyouranswers', {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      })
+      const data = await response.json()
+      if(data.length === 0) return
+      setAnswers(data)
+    })()
+// eslint-disable-next-line
+  }, [])
+console.log(answers);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;
-    const response = await fetch("http://localhost:4000/question/addquestion", {
+    const response = await fetch('http://localhost:4000/question/askyourself', {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +40,6 @@ const ProfilePage = () => {
         "refresh-token": refreshToken,
       },
       body: JSON.stringify({
-        reciever_id: "a61918b2-6898-4ea3-8dbd-9d55f03c3470",
         question,
         isAnonymous,
       }),
@@ -46,11 +64,17 @@ const ProfilePage = () => {
           isAnonymous={isAnonymous}
           setIsAnonymous={setIsAnonymous}
         />
-        <AnswerModel />
-        <AnswerModel />
-        <AnswerModel />
-        <AnswerModel />
-        <AnswerModel />
+        {answers.map(answer=>{
+          return (
+            <div key={answer.question_id}>
+              <AnswerModel 
+              question = {answer.question}
+              answeredDate = {answer.answered_date}
+              answer = {answer.answer}
+              />
+            </div>
+          )
+        })}
       </div>
     </>
   );

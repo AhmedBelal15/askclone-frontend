@@ -1,20 +1,19 @@
-import HomePageNav from '../../Components/HomePageNav/HomePageNav.Component'
-import AddQuestion from '../../Components/AddQuestion/AddQuestion.component'
-import AnswerModel from '../../Components/AnswerModel/AnswerModel.component'
-import './home-page.style.css'
+import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
+import AddQuestion from "../../Components/AddQuestion/AddQuestion.component";
+import AnswerModel from "../../Components/AnswerModel/AnswerModel.component";
+import "./home-page.style.css";
 
 const HomePage = () => {
+  return (
+    <>
+      <HomePageNav />
+      <div className="home-page">
+        <AddQuestion />
+        <div style={{ height: "50px" }}></div>
+        <AnswerModel />
+      </div>
+    </>
+  );
+};
 
-    return(
-        <>
-            <HomePageNav />
-        <div className='home-page'>
-            <AddQuestion />
-            <div style={{height: '50px'}}></div>
-            <AnswerModel />
-        </div>
-        </>
-    );
-}
-
-export default HomePage
+export default HomePage;

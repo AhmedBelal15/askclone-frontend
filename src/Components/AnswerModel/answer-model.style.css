@@ -1,5 +1,5 @@
 .answer-model{
-    min-height: 175px;
+    min-height: 140px;
     width: 480px;
     padding: 10px 10px 15px 10px;
     background: white;
@@ -54,7 +54,8 @@
 
 .answer {
     word-wrap: break-word;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 800;
     color: #4A4A50;
     margin-top: 5px;
     margin-bottom: 15px;

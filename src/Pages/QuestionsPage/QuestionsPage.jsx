@@ -18,9 +18,13 @@ const QuestionsPage = () => {
           "refresh-token": refreshToken,
         },
       });
-      const newQuestions = questions.filter(question=> question.question_id !== id)
-      setQuestions(newQuestions)
-    } catch (error) {alert('error')}
+      const newQuestions = questions.filter(
+        (question) => question.question_id !== id
+      );
+      setQuestions(newQuestions);
+    } catch (error) {
+      alert("error");
+    }
   };
   useEffect(() => {
     (async function () {
@@ -38,12 +42,13 @@ const QuestionsPage = () => {
       const data = await response.json();
       setQuestions([...data]);
     })();
+    // eslint-disable-next-line
   }, []);
   return (
     <>
       <HomePageNav />
       <div className="questions-page-container">
-      {questions.length === 0 ? <NoDataCard data={'Questions'} />: null}
+        {questions.length === 0 ? <NoDataCard data={"Questions"} /> : null}
         {questions.map((question) => {
           return (
             <div key={question.question_id}>
@@ -52,7 +57,8 @@ const QuestionsPage = () => {
                 recieverId={question.reciever_id}
                 question={question.question}
                 date={question.asked_date}
-                handleDelete={()=> handleDelete(question.question_id)}
+                questionId={question.question_id}
+                handleDelete={() => handleDelete(question.question_id)}
               />
             </div>
           );
