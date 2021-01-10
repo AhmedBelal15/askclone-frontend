@@ -44,7 +44,7 @@ const QuestionsPage = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
+      if(data === 'error')return
       setQuestions([...data]);
     })();
     // eslint-disable-next-line

@@ -32,7 +32,7 @@ const ProfilePage = () => {
     })();
     // eslint-disable-next-line
   }, []);
-  console.log(answers);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;

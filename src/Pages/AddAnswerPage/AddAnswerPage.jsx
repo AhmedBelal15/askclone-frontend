@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import AddAnswerModel from "../../Components/AddAnswerModel/AddAnswerModel.component";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
+import {useHistory} from 'react-router-dom'
 import "./add-answer-page.style.css";
 const AddAnswerPage = () => {
   const [answer, setAnswer] = useState("");
@@ -13,7 +14,7 @@ const AddAnswerPage = () => {
   const questionId = useParams().questionid;
   const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
   const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
-
+  const history = useHistory()
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -53,7 +54,7 @@ const AddAnswerPage = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    if(data === 'answered successfully'){history.push('/profile')}
   };
 
   return (
