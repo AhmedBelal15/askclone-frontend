@@ -44,6 +44,7 @@ const UserPage = () => {
   };
 
   //Fetching user Answers
+  let isMounted = true
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -59,8 +60,10 @@ const UserPage = () => {
       );
       const data = await response.json();
       if (data[0] === "error") return;
-      setAnswers(data);
+        if(isMounted){setAnswers(data);}
     })();
+    //preventing memory leak
+    return()=> {isMounted = false}
     // eslint-disable-next-line
   }, []);
 
