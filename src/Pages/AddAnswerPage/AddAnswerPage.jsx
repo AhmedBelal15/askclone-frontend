@@ -12,8 +12,8 @@ const AddAnswerPage = () => {
     isAnonymous: true,
   });
   const questionId = useParams().questionid;
-  const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
-  const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"))
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"))
   const history = useHistory()
   useEffect(() => {
     (async function () {
@@ -29,7 +29,7 @@ const AddAnswerPage = () => {
         }
       );
       const data = await response.json();
-
+        
       setQuestionData({
         question: data.question,
         isAnonymous: data.isAnonymous,

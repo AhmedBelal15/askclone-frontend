@@ -24,3 +24,21 @@
 .profilebox-name{
     margin-right: 15px;
 }
+
+.profilebox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profilebox button{
+    width: 80%;
+    background: transparent;
+    margin-top: 5px;
+    padding: 2.5px 0px;
+    border: solid #EDE7E3 2px;
+    color: #EDE7E3;
+    letter-spacing: normal;
+    font-weight: 800;
+    font-size: 14px;
+}

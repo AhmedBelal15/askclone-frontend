@@ -11,9 +11,11 @@ const ProfilePage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [image, setImage] = useState('https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg')
-  const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
-  const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  const [image, setImage] = useState(
+    "https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg"
+  );
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
 
   useEffect(() => {
     (async function () {
@@ -34,7 +36,7 @@ const ProfilePage = () => {
     })();
     // eslint-disable-next-line
   }, []);
-
+  //handle question submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;
@@ -53,9 +55,6 @@ const ProfilePage = () => {
     const data = await response.json();
     setQuestion("");
 
-    if (data[1] !== undefined) {
-      localStorage.setItem("user", JSON.stringify(data[1]));
-    }
   };
 
   return (
@@ -68,7 +67,7 @@ const ProfilePage = () => {
       </div>
       <HomePageNav />
       <div className="profile-page-container">
-      <ProfileBoxHeader image={image} />
+        <ProfileBoxHeader image={image} isVisible="none" />
         <AddQuestion
           question={question}
           setQuestion={setQuestion}
@@ -83,6 +82,8 @@ const ProfilePage = () => {
                 question={answer.question}
                 answeredDate={answer.answered_date}
                 answer={answer.answer}
+                isAnonymous={answer.is_anonymous}
+                likedBy={answer.liked_by}
               />
             </div>
           );

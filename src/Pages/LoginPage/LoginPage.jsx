@@ -22,8 +22,11 @@ const LoginPage = ({ setLogin }) => {
       }),
     });
     const data = await response.json();
-    if (data[0] === "logged in") {
-      localStorage.setItem("user", JSON.stringify(data[1]));
+    if (response.status === 200) {
+      localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
+      localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken))
+      localStorage.setItem('userName', JSON.stringify(data.username))
+      localStorage.setItem('userId', JSON.stringify(data.userId))
       localStorage.setItem("loggedIn", "true");
       setLogin(true);
     } else {

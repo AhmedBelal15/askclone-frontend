@@ -7,8 +7,8 @@ import "./questions-page.style.css";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
-  const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
-  const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   //handle delete function
   const handleDelete = async (id) => {
     try {

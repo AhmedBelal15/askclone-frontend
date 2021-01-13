@@ -2,7 +2,7 @@ import AddQuestion from "../../Components/AddQuestion/AddQuestion.component.jsx"
 import { useState, useEffect } from "react";
 import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
 import "../ProfilePage/profile-page.style.css";
@@ -11,10 +11,11 @@ const UserPage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const accessToken = JSON.parse(localStorage.getItem("user")).accessToken;
-  const refreshToken = JSON.parse(localStorage.getItem("user")).refreshToken;
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const profileId = useParams().id;
-
+  const history = useHistory()
+  if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
   //handleSubmit for Asking a Question
   const handleSubmit = async (e) => {
     e.preventDefault();
