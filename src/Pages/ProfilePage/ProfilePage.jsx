@@ -4,8 +4,9 @@ import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx"
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
-import "./profile-page.style.css";
 import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
+import tokensRefresher from '../../helpers/tokensRefresher'
+import "./profile-page.style.css";
 
 const ProfilePage = () => {
   const [question, setQuestion] = useState("");
@@ -14,9 +15,10 @@ const ProfilePage = () => {
   const [image, setImage] = useState(
     "https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg"
   );
+
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-
+ 
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -31,8 +33,9 @@ const ProfilePage = () => {
         }
       );
       const data = await response.json();
-      if (data.length === 0) return;
-      setAnswers(data);
+      if (data === 0) return;
+      tokensRefresher(data)
+      setAnswers(data.payload);
     })();
     // eslint-disable-next-line
   }, []);
@@ -53,6 +56,7 @@ const ProfilePage = () => {
       }),
     });
     const data = await response.json();
+    tokensRefresher(data)
     setQuestion("");
 
   };
@@ -84,6 +88,7 @@ const ProfilePage = () => {
                 answer={answer.answer}
                 isAnonymous={answer.is_anonymous}
                 likedBy={answer.liked_by}
+                questionId={answer.question_id}
               />
             </div>
           );

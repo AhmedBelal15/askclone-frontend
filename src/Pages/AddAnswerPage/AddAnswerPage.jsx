@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import AddAnswerModel from "../../Components/AddAnswerModel/AddAnswerModel.component";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import {useHistory} from 'react-router-dom'
+import tokensRefresher from '../../helpers/tokensRefresher'
 import "./add-answer-page.style.css";
 const AddAnswerPage = () => {
   const [answer, setAnswer] = useState("");
@@ -31,9 +32,10 @@ const AddAnswerPage = () => {
       const data = await response.json();
         
       setQuestionData({
-        question: data.question,
-        isAnonymous: data.isAnonymous,
+        question: data.payload.question,
+        isAnonymous: data.payload.isAnonymous,
       });
+      tokensRefresher(data)
     })();
   }, []);
 
@@ -54,7 +56,8 @@ const AddAnswerPage = () => {
       }
     );
     const data = await response.json();
-    if(data === 'answered successfully'){history.push('/profile')}
+    tokensRefresher(data)
+    if(response.status === 200){history.push('/profile')}
   };
 
   return (

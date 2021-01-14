@@ -5,12 +5,15 @@ import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx"
 import { useParams, useHistory } from "react-router-dom";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
+import tokensRefresher from '../../helpers/tokensRefresher'
+import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
 import "../ProfilePage/profile-page.style.css";
 
 const UserPage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
+  const [like, setLike] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const profileId = useParams().id;
@@ -36,6 +39,7 @@ const UserPage = () => {
       }
     );
     const data = await response.json();
+    tokensRefresher(data)
     setQuestion("");
 
     if (data[1] !== undefined) {
@@ -59,8 +63,9 @@ const UserPage = () => {
         }
       );
       const data = await response.json();
-      if (data[0] === "error") return;
-        if(isMounted){setAnswers(data);}
+      tokensRefresher(data)
+      if (response.status === 400) return;
+        if(isMounted){setAnswers(data.payload);}
     })();
     //preventing memory leak
     return()=> {isMounted = false}
@@ -75,6 +80,7 @@ const UserPage = () => {
       </Helmet>
       <HomePageNav />
       <div className="profile-page-container">
+        <ProfileBoxHeader />
         <AddQuestion
           question={question}
           setQuestion={setQuestion}
@@ -87,9 +93,12 @@ const UserPage = () => {
             return (
               <div key={answer.question_id}>
                 <AnswerModel
-                  question={answer.question}
-                  askedDate={answer.answered_date}
-                  answer={answer.answer}
+                question={answer.question}
+                answeredDate={answer.answered_date}
+                answer={answer.answer}
+                isAnonymous={answer.is_anonymous}
+                likedBy={answer.liked_by}
+                questionId={answer.question_id}
                 />
               </div>
             );

@@ -3,6 +3,7 @@ import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import QuestionModel from "../../Components/QuestionModel/QuestionModel.Component";
 import { Helmet } from "react-helmet";
+import tokensRefresher from '../../helpers/tokensRefresher'
 import "./questions-page.style.css";
 
 const QuestionsPage = () => {
@@ -44,8 +45,9 @@ const QuestionsPage = () => {
         }
       );
       const data = await response.json();
-      if(data === 'error')return
-      setQuestions([...data]);
+      if(response.status === 400)return
+      if(data.payload != undefined) {setQuestions([...data.payload]);}
+      tokensRefresher(data)
     })();
     // eslint-disable-next-line
   }, []);
