@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import "./home-page.style.css";
 
 const HomePage = () => {
+
   return (
     <>
       <div className="application">

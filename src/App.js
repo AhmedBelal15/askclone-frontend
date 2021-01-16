@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import MainPage from "./Pages/MainPage/MainPage";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
@@ -12,15 +12,17 @@ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
 import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 import UserPage from './Pages/UserPage/UserPage'
+import {AuthContext} from './Context/AuthContext'
 function App() {
+
   //handle app sign in
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useContext(AuthContext)
   const getLoggedIn = localStorage.getItem("loggedIn");
   if (getLoggedIn === "true" && login === false) {
     setLogin(true);
   }
   //////////////////////
-
+  
   return (
     <Router>
       <Route
@@ -88,7 +90,6 @@ function App() {
         path="/answerquestion/:questionid"
         render={() => (!login ? <Redirect to="/login" /> : <AddAnswerPage />)}
       />
-
     </Router>
   );
 }
