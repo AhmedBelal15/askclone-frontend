@@ -11,6 +11,7 @@ const AnswerModel = ({
   isAnonymous,
   likedBy,
   questionId,
+  image
 
 }) => {
   const [backgroundImage, setBackgroundImage] = useState(
@@ -103,7 +104,7 @@ const AnswerModel = ({
       </span>
 
       <article className="answer">{answer}</article>
-
+      {image?<img src={image} alt="answer-image"/>:null}
       <div className="answer-likes">
         <Heart
           onClick={handleLike}
@@ -111,6 +112,7 @@ const AnswerModel = ({
         />
         <p className="likes-count">{count}</p>
       </div>
+
     </div>
   );
 };

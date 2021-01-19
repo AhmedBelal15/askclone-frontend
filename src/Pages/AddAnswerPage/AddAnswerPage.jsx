@@ -3,19 +3,26 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import AddAnswerModel from "../../Components/AddAnswerModel/AddAnswerModel.component";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
-import {useHistory} from 'react-router-dom'
-import tokensRefresher from '../../helpers/tokensRefresher'
+import { useHistory } from "react-router-dom";
+import tokensRefresher from "../../helpers/tokensRefresher";
 import "./add-answer-page.style.css";
 const AddAnswerPage = () => {
-  const [answer, setAnswer] = useState("");
+  //state
+  const [answer, setAnswer] = useState('');
+  const [imagePath, setImagePath] = useState(null)
   const [questionData, setQuestionData] = useState({
     question: "",
     isAnonymous: true,
   });
+
+  //getting tokens for sending request
   const questionId = useParams().questionid;
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"))
-  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"))
-  const history = useHistory()
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+
+  const history = useHistory();
+
+  //fetching the question data
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -30,17 +37,18 @@ const AddAnswerPage = () => {
         }
       );
       const data = await response.json();
-        
+
       setQuestionData({
         question: data.payload.question,
         isAnonymous: data.payload.isAnonymous,
       });
-      tokensRefresher(data)
+      tokensRefresher(data);
     })();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (answer.text === "") return;
     const response = await fetch(
       `http://localhost:4000/questions/addanswer/${questionId}`,
       {
@@ -51,13 +59,19 @@ const AddAnswerPage = () => {
           "refresh-token": refreshToken,
         },
         body: JSON.stringify({
-          answer,
+          answer: answer,
+          imagePath
         }),
       }
     );
+
     const data = await response.json();
-    tokensRefresher(data)
-    if(response.status === 200){history.push('/profile')}
+    tokensRefresher(data);
+    if (response.status === 200) {
+      setAnswer('')
+      setImagePath(null)
+      history.push("/profile");
+    }
   };
 
   return (
@@ -72,8 +86,9 @@ const AddAnswerPage = () => {
       <div className="add-answer-container">
         <AddAnswerModel
           handleSubmit={handleSubmit}
-          answer={answer}
+          answer={answer.text}
           setAnswer={setAnswer}
+          setImagePath={setImagePath}
           question={questionData.question}
           isAnonymous={questionData.isAnonymous}
         />

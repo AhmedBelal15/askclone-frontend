@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import "./login-page.style.css";
 import LoginRegisterNav from "../../Components/LoginRegisterNav/LoginRegisterNav.Component";
+import useStore from '../../Zustand/AuthZustand'
+import "./login-page.style.css";
 
-const LoginPage = ({ setLogin }) => {
+const LoginPage = () => {
+  const setLogin = useStore(state => state.setLogin)
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -28,7 +30,7 @@ const LoginPage = ({ setLogin }) => {
       localStorage.setItem('userName', JSON.stringify(data.username))
       localStorage.setItem('userId', JSON.stringify(data.userId))
       localStorage.setItem("loggedIn", "true");
-      setLogin(true);
+      setLogin();
     } else {
       alert(data);
     }

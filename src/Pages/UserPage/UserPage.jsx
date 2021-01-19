@@ -17,8 +17,9 @@ const UserPage = () => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const profileId = useParams().id;
-  const history = useHistory()
-  if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
+  // const history = useHistory()
+  // if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
+
   //handleSubmit for Asking a Question
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,6 +64,7 @@ const UserPage = () => {
         }
       );
       const data = await response.json();
+      setAnswers(data.payload)
       tokensRefresher(data)
       if (response.status === 400) return;
         if(isMounted){setAnswers(data.payload);}
@@ -99,6 +101,7 @@ const UserPage = () => {
                 isAnonymous={answer.is_anonymous}
                 likedBy={answer.liked_by}
                 questionId={answer.question_id}
+                image={answer.answer_image}
                 />
               </div>
             );

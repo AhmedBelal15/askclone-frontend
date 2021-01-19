@@ -1,7 +1,12 @@
 import "./App.css";
-import { useState, useContext } from "react";
+import useStore from "./Zustand/AuthZustand";
 import MainPage from "./Pages/MainPage/MainPage";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
@@ -11,18 +16,17 @@ import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
 import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
-import UserPage from './Pages/UserPage/UserPage'
-import {AuthContext} from './Context/AuthContext'
-function App() {
+import UserPage from "./Pages/UserPage/UserPage";
 
-  //handle app sign in
-  const [login, setLogin] = useContext(AuthContext)
+function App() {
+// Trying Zustand
+const login = useStore(state => state.login)
+const setLogin = useStore(state=> state.setLogin)
   const getLoggedIn = localStorage.getItem("loggedIn");
   if (getLoggedIn === "true" && login === false) {
-    setLogin(true);
+    setLogin()
   }
-  //////////////////////
-  
+
   return (
     <Router>
       <Route
@@ -35,7 +39,7 @@ function App() {
         exact
         path="/login"
         render={() =>
-          login ? <Redirect to="/home" /> : <LoginPage setLogin={setLogin} />
+          login ? <Redirect to="/home" /> : <LoginPage  />
         }
       />
 

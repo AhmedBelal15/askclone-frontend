@@ -1,12 +1,10 @@
-import { useContext } from 'react'
-import {AuthContext} from '../../Context/AuthContext'
 import './logout-popup.style.css'
-
+import useStore from '../../Zustand/AuthZustand'
 const LogoutPopup = ({isVisible,handleVisibility}) => {
-const [login, setLogin] = useContext(AuthContext)
+const setLogout = useStore(state => state.setLogout)
 const handleLogout = () => {
     localStorage.clear()
-    setLogin(false)
+    setLogout()
 }
     return (
         <div className={`logout-popup ${isVisible? 'popup-visible' : 'popup-hidden'}`} >

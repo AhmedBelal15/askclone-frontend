@@ -1,5 +1,6 @@
 import AddQuestion from "../../Components/AddQuestion/AddQuestion.component.jsx";
 import { useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
 import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
@@ -89,6 +90,7 @@ const ProfilePage = () => {
                 isAnonymous={answer.is_anonymous}
                 likedBy={answer.liked_by}
                 questionId={answer.question_id}
+                image={answer.answer_image}
               />
             </div>
           );

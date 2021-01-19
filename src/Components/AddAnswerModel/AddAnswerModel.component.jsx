@@ -1,18 +1,83 @@
 import "./add-answer-model.style.css";
+import { useState } from "react";
+import tokensRefresher from '../../helpers/tokensRefresher'
+const AddAnswerModel = ({
+  handleSubmit,
+  answer,
+  setAnswer,
+  question,
+  isAnonymous,
+  setImagePath
+}) => {
 
-const AddAnswerModel = ({handleSubmit, answer, setAnswer, question, isAnonymous}) => {
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  
+  const [selectedFile, setSelectedFile] = useState({
+    fileName: '',
+    file: null,
+  });
+
+  const handleImageUpload = async (event) => {
+    setSelectedFile({
+      fileName: event.target.value ,
+      file: event.target.files[0],
+    });
+
+    const formData = new FormData();
+    formData.append("image", selectedFile.file);
+    const response = await fetch("http://localhost:4000/upload/image", {
+      method: "post",
+      headers: {
+        "access-token": `Bearer ${accessToken}`,
+        "refresh-token": refreshToken,
+      },
+      body: formData,
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+    setImagePath(`http://localhost:4000/${data.payload}`)
+    }
+    tokensRefresher(data);
+  };
+
   return (
-    <form className="add-answer-model-container" onSubmit={handleSubmit}>
-      <div className="question-text" dir='auto'> <p>{question}</p></div>
+    <form
+      className="add-answer-model-container"
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+    >
+      <div className="question-text" dir="auto">
+        <p>{question}</p>
+      </div>
       <div className="answer-area">
         <textarea
-        value={answer}
-        onChange={(e)=>{setAnswer(e.target.value)}}
-        name="answer-area" id="answer-area" dir='auto'></textarea>
+          value={answer}
+          onChange={(e) => {
+            setAnswer(e.target.value);
+          }}
+          name="answer-area"
+          id="answer-area"
+          dir="auto"
+        ></textarea>
       </div>
       <div className="inline-between add-answer-footer">
-        <button className ='answer-button'>Answer</button>
-        <input type="file" accept="image/*" />
+        <button className="answer-button">Answer</button>
+        <div>
+          <input
+            value={selectedFile.fileName}
+            onChange={(e) => {
+              handleImageUpload(e);
+            }}
+            type="file"
+            id="upload-image"
+            accept="image/*"
+            className="upload-image-button"
+          />
+          <label htmlFor="upload-image" className="upload-label">
+            Upload an Image
+          </label>
+        </div>
       </div>
     </form>
   );
