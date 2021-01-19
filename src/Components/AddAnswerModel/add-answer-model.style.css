@@ -54,6 +54,7 @@
   border-radius: 5px;
   display: block;
   margin-top: 1px;
+  cursor: pointer;
 }
 
 .upload-label:hover {

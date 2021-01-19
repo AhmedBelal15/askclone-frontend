@@ -12,7 +12,6 @@ const AnswerModel = ({
   likedBy,
   questionId,
   image
-
 }) => {
   const [backgroundImage, setBackgroundImage] = useState(
     "https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg"
@@ -104,7 +103,7 @@ const AnswerModel = ({
       </span>
 
       <article className="answer">{answer}</article>
-      {image?<img src={image} alt="answer-image"/>:null}
+      {image?<img src={`http://localhost:4000/${image}`} alt="answer-image"/>:null}
       <div className="answer-likes">
         <Heart
           onClick={handleLike}

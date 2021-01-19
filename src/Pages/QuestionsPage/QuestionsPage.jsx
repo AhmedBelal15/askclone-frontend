@@ -31,6 +31,7 @@ const QuestionsPage = () => {
   };
 
   //fetching user questions
+  let isMounted = true
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -46,10 +47,11 @@ const QuestionsPage = () => {
       );
       const data = await response.json();
       if(response.status === 400)return
-      if(data.payload != undefined) {setQuestions([...data.payload]);}
+      if(data.payload != undefined && isMounted) {setQuestions([...data.payload]);}
       tokensRefresher(data)
     })();
     // eslint-disable-next-line
+    return ()=> isMounted=false
   }, []);
   return (
     <>

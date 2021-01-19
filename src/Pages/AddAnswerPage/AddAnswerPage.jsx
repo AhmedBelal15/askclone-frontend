@@ -9,12 +9,11 @@ import "./add-answer-page.style.css";
 const AddAnswerPage = () => {
   //state
   const [answer, setAnswer] = useState('');
-  const [imagePath, setImagePath] = useState(null)
   const [questionData, setQuestionData] = useState({
     question: "",
     isAnonymous: true,
   });
-
+  const [imagePath, setImagePath] = useState(null)
   //getting tokens for sending request
   const questionId = useParams().questionid;
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -68,8 +67,6 @@ const AddAnswerPage = () => {
     const data = await response.json();
     tokensRefresher(data);
     if (response.status === 200) {
-      setAnswer('')
-      setImagePath(null)
       history.push("/profile");
     }
   };
@@ -88,9 +85,9 @@ const AddAnswerPage = () => {
           handleSubmit={handleSubmit}
           answer={answer.text}
           setAnswer={setAnswer}
-          setImagePath={setImagePath}
           question={questionData.question}
           isAnonymous={questionData.isAnonymous}
+          setImagePath={setImagePath}
         />
       </div>
     </>

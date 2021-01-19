@@ -1,45 +1,34 @@
 import "./add-answer-model.style.css";
-import { useState } from "react";
 import tokensRefresher from '../../helpers/tokensRefresher'
 const AddAnswerModel = ({
   handleSubmit,
   answer,
   setAnswer,
   question,
-  isAnonymous,
   setImagePath
 }) => {
 
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   
-  const [selectedFile, setSelectedFile] = useState({
-    fileName: '',
-    file: null,
-  });
+  const handleImageUpload = async(event) => {
+    const formData = new FormData()
+    formData.append('image', event.target.files[0])
 
-  const handleImageUpload = async (event) => {
-    setSelectedFile({
-      fileName: event.target.value ,
-      file: event.target.files[0],
-    });
-
-    const formData = new FormData();
-    formData.append("image", selectedFile.file);
-    const response = await fetch("http://localhost:4000/upload/image", {
-      method: "post",
-      headers: {
-        "access-token": `Bearer ${accessToken}`,
-        "refresh-token": refreshToken,
-      },
-      body: formData,
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-    setImagePath(`http://localhost:4000/${data.payload}`)
+    const response = await fetch('http://localhost:4000/upload/image', {
+    method: 'post',
+    headers: {
+      "access-token": `Bearer ${accessToken}`,
+      "refresh-token": refreshToken,
+    },
+    body: formData
+    })
+    const data = await response.json()
+    if(response.status === 200){
+      setImagePath(data.payload)
+      tokensRefresher(data)
     }
-    tokensRefresher(data);
-  };
+  }
 
   return (
     <form
@@ -65,14 +54,11 @@ const AddAnswerModel = ({
         <button className="answer-button">Answer</button>
         <div>
           <input
-            value={selectedFile.fileName}
-            onChange={(e) => {
-              handleImageUpload(e);
-            }}
             type="file"
             id="upload-image"
             accept="image/*"
             className="upload-image-button"
+            onChange={(e)=> handleImageUpload(e)}
           />
           <label htmlFor="upload-image" className="upload-label">
             Upload an Image
