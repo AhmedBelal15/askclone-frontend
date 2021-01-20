@@ -1,0 +1,101 @@
+.settings-page-container{
+    min-height: 100vh;
+    background: #2b3237;
+    display: flex;
+    justify-content: center;   
+}
+
+.settings-form{
+    margin-top: 140px;
+    width: max-content;
+    padding: 10px 15px;
+    height: max-content;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-form input {
+    width: 480px;
+    height: 40px;
+    padding: 0px 5px;
+    font-size: 16px;
+}
+
+.settings-form-label {
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.settings-form textarea {
+    min-width: 480px;
+    max-width: 480px;
+    min-height: 40px;
+    max-height: 140px;
+    padding: 5px 5px;
+    font-size: 16px;
+}
+
+.settings-button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background: #ee1144;
+    border: none;
+    padding: 0px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings-form select{
+    height: 40px;
+    font-size: 16px;
+}
+
+#profile-image-input{
+    display: none;
+}
+
+.image-buttons-container{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings-image-input{
+    text-align: center;
+    padding: 12px 0px;
+    background: #ee1144;
+    color: white;
+    border-radius: 5px;
+    margin-right: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    min-width: 45%;
+}
+
+.settings-profile-image{
+    max-width: 500px;
+    height: auto;
+    margin-top: 10px;
+}
+
+
+.discard-button{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    background: white;
+    color: #ee1144;
+    border: solid 2px #ee1144;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 50%;
+}

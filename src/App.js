@@ -17,14 +17,14 @@ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
 import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 import UserPage from "./Pages/UserPage/UserPage";
-
+import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 function App() {
-// Trying Zustand
-const login = useStore(state => state.login)
-const setLogin = useStore(state=> state.setLogin)
+  // Trying Zustand
+  const login = useStore((state) => state.login);
+  const setLogin = useStore((state) => state.setLogin);
   const getLoggedIn = localStorage.getItem("loggedIn");
   if (getLoggedIn === "true" && login === false) {
-    setLogin()
+    setLogin();
   }
 
   return (
@@ -38,9 +38,7 @@ const setLogin = useStore(state=> state.setLogin)
       <Route
         exact
         path="/login"
-        render={() =>
-          login ? <Redirect to="/home" /> : <LoginPage  />
-        }
+        render={() => (login ? <Redirect to="/home" /> : <LoginPage />)}
       />
 
       <Route
@@ -93,6 +91,12 @@ const setLogin = useStore(state=> state.setLogin)
         exact
         path="/answerquestion/:questionid"
         render={() => (!login ? <Redirect to="/login" /> : <AddAnswerPage />)}
+      />
+
+      <Route
+        exact
+        path="/settings"
+        render={() => (!login ? <Redirect to="/login" /> : <SettingsPage />)}
       />
     </Router>
   );
