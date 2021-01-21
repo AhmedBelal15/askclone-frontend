@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import tokensRefresher from "../../helpers/tokensRefresher";
+import useStore from '../../Zustand/AuthZustand'
 import "./settings-page.style.css";
 
 const SettingsPage = () => {
@@ -19,6 +20,7 @@ const SettingsPage = () => {
   const history = useHistory();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  const Logout = useStore(state => state.setLogout)
 
   useEffect(() => {
 
@@ -32,6 +34,10 @@ const SettingsPage = () => {
         },
       });
       const data = await response.json();
+      if(response.status === 401){
+        localStorage.clear()
+        Logout()
+    }
       if (response.status === 200) {
         console.log(data);
         tokensRefresher(data);

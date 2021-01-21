@@ -5,6 +5,8 @@ import AddAnswerModel from "../../Components/AddAnswerModel/AddAnswerModel.compo
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import { useHistory } from "react-router-dom";
 import tokensRefresher from "../../helpers/tokensRefresher";
+import useStore from '../../Zustand/AuthZustand'
+
 import "./add-answer-page.style.css";
 const AddAnswerPage = () => {
   //state
@@ -18,7 +20,7 @@ const AddAnswerPage = () => {
   const questionId = useParams().questionid;
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-
+  const Logout = useStore(state => state.setLogout)
   const history = useHistory();
 
   //fetching the question data
@@ -35,6 +37,10 @@ const AddAnswerPage = () => {
           },
         }
       );
+      if(response.status === 401){
+        localStorage.clear()
+        Logout()
+    }
       const data = await response.json();
 
       setQuestionData({

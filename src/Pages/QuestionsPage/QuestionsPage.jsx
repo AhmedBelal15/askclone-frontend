@@ -4,12 +4,15 @@ import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import QuestionModel from "../../Components/QuestionModel/QuestionModel.Component";
 import { Helmet } from "react-helmet";
 import tokensRefresher from '../../helpers/tokensRefresher'
+import useStore from '../../Zustand/AuthZustand'
 import "./questions-page.style.css";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  const Logout = useStore(state => state.setLogout)
+
   //handle delete function
   const handleDelete = async (id) => {
     try {
@@ -47,6 +50,10 @@ const QuestionsPage = () => {
       );
       const data = await response.json();
       if(response.status === 400)return
+      if(response.status === 401){
+        localStorage.clear()
+        Logout()
+    }
       if(data.payload != undefined && isMounted) {setQuestions([...data.payload]);}
       tokensRefresher(data)
     })();

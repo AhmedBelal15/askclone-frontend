@@ -7,6 +7,7 @@ import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
 import tokensRefresher from '../../helpers/tokensRefresher'
 import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
+import useStore from '../../Zustand/AuthZustand'
 import "../ProfilePage/profile-page.style.css";
 
 const UserPage = () => {
@@ -16,6 +17,7 @@ const UserPage = () => {
   const [like, setLike] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  const Logout = useStore(state => state.setLogout)
   const profileId = useParams().id;
   // const history = useHistory()
   // if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
@@ -67,6 +69,10 @@ const UserPage = () => {
       setAnswers(data.payload)
       tokensRefresher(data)
       if (response.status === 400) return;
+      if(response.status === 401){
+        localStorage.clear()
+        Logout()
+    }
         if(isMounted){setAnswers(data.payload);}
     })();
     //preventing memory leak

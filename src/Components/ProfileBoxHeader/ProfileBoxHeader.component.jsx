@@ -1,6 +1,8 @@
+import { useState } from "react"
 import "./profile-box-header.style.css"
 const ProfileBoxHeader = ({image, isVisible}) =>{
 const profilename = JSON.parse(localStorage.getItem('userName'))
+
     return(
         <div className='profile-header'>
             <div className='profilebox'>

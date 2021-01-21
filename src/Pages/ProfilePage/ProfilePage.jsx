@@ -1,6 +1,6 @@
 import AddQuestion from "../../Components/AddQuestion/AddQuestion.component.jsx";
 import { useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import useStore from '../../Zustand/AuthZustand'
 import AnswerModel from "../../Components/AnswerModel/AnswerModel.component.jsx";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
@@ -13,13 +13,11 @@ const ProfilePage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [image, setImage] = useState(
-    "https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg"
-  );
+  const [image, setImage] = useState('');
 
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
- 
+  const Logout = useStore(state => state.setLogout)
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -33,6 +31,11 @@ const ProfilePage = () => {
           },
         }
       );
+      if(response.status === 401){
+        localStorage.clear()
+        Logout()
+    }
+      
       const data = await response.json();
       if (data === 0) return;
       tokensRefresher(data)
@@ -40,6 +43,29 @@ const ProfilePage = () => {
     })();
     // eslint-disable-next-line
   }, []);
+
+    useEffect(() => {
+    (async function () {
+      const userId = JSON.parse(localStorage.getItem('userId'))
+      const response = await fetch(
+        `http://localhost:4000/user/getimage/${userId}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = await response.json();
+      const newData = data.user_image.replace(/\\/g, "/").substring("".length);
+      setImage(`http://localhost:4000/${newData}`)
+      // console.log(`http://localhost:4000/${data.user_image}`);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   //handle question submit
   const handleSubmit = async (e) => {
     e.preventDefault();
