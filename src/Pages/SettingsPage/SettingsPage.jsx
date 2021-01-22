@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import tokensRefresher from "../../helpers/tokensRefresher";
-import useStore from '../../Zustand/AuthZustand'
+import useStore from "../../Zustand/AuthZustand";
 import "./settings-page.style.css";
 
 const SettingsPage = () => {
@@ -20,10 +20,9 @@ const SettingsPage = () => {
   const history = useHistory();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-  const Logout = useStore(state => state.setLogout)
+  const Logout = useStore((state) => state.setLogout);
 
   useEffect(() => {
-
     (async function () {
       const response = await fetch("http://localhost:4000/user/getsettings", {
         method: "get",
@@ -34,27 +33,27 @@ const SettingsPage = () => {
         },
       });
       const data = await response.json();
-      if(response.status === 401){
-        localStorage.clear()
-        Logout()
-    }
+      if (response.status === 401) {
+        localStorage.clear();
+        Logout();
+      }
       if (response.status === 200) {
-        console.log(data);
         tokensRefresher(data);
-        setSettings({
-          name: data.payload.user_name,
-          location: data.payload.user_location,
-          email: data.payload.user_email,
-          bio: data.payload.user_bio,
-          birthday: data.payload.user_birthday.substring(0, 10),
-          gender: data.payload.user_gender,
-          imagePath: data.payload.user_image,
-        });
+
+
+          setSettings({
+            name: data.payload.user_name,
+            location: data.payload.user_location,
+            email: data.payload.user_email,
+            bio: data.payload.user_bio,
+            birthday: data.payload.user_birthday,
+            gender: data.payload.user_gender,
+            imagePath: data.payload.user_image,
+          });
+
       }
     })();
-
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();

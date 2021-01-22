@@ -60,6 +60,7 @@ const ProfilePage = () => {
       );
       const data = await response.json();
       const newData = data.user_image.replace(/\\/g, "/").substring("".length);
+      if(!newData) return
       setImage(`http://localhost:4000/${newData}`)
       // console.log(`http://localhost:4000/${data.user_image}`);
     })();

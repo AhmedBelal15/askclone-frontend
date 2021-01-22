@@ -1,12 +1,7 @@
 import "./App.css";
 import useStore from "./Zustand/AuthZustand";
 import MainPage from "./Pages/MainPage/MainPage";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Redirect,} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
@@ -18,6 +13,7 @@ import QuestionsPage from "./Pages/QuestionsPage/QuestionsPage";
 import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 import UserPage from "./Pages/UserPage/UserPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
+import FriendsPage from "./Pages/FriendsPage/FriendsPage";
 function App() {
   // Trying Zustand
   const login = useStore((state) => state.login);
@@ -97,6 +93,12 @@ function App() {
         exact
         path="/settings"
         render={() => (!login ? <Redirect to="/login" /> : <SettingsPage />)}
+      />
+
+      <Route
+        exact
+        path="/following"
+        render={() => (!login ? <Redirect to="/login" /> : <FriendsPage />)}
       />
     </Router>
   );

@@ -32,7 +32,7 @@ const HomePageNav = () => {
           </div>
           <Link to='/settings'><SettingsIcon className='nav-icon'  alt='settings icon' title='Settings' /></Link>
           <Link to='/notifications'><NotificationIcon className='nav-icon' alt='notifications icon' title='Notification' /></Link>
-          <Link to='/friends'><img src={FriendsIcon} alt="friends icon" className='nav-icon' title='Following' /></Link>
+          <Link to='/following'><img src={FriendsIcon} alt="friends icon" className='nav-icon' title='Following' /></Link>
           <Link to='/profile'><img src={UserIcon} className='nav-icon' alt="profile icon" title="Profile" /></Link>
           <Link to='/questions'><img src={QuestionIcon} className='nav-icon' alt="question icon" title='Questions' /></Link>
           <Link to='/home'><HomeIcon className='nav-icon' alt='home icon' title="Home" /></Link>

@@ -1,0 +1,39 @@
+.followed-user-card{
+    width: 500px;
+    min-width: 500px;
+    background: white;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.followed-user-image{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background: chocolate;
+    overflow: hidden;
+    background: url('https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg') no-repeat;
+    background-position: center; 
+    background-size: 70px auto;
+    margin: 0 15px;
+    box-shadow: 0px 0px 0px 4px gray;
+}
+
+.followed-user{
+    text-decoration: none;
+    font-size: 36px;
+    font-weight: 600;
+    color: #2b3237;
+    transition: 300ms;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.followed-user:hover {
+    color: #ee1144;
+}
+

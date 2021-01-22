@@ -1,0 +1,7 @@
+.friends-page-container{
+    min-height: 100vh;
+    background: #2d3238;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
