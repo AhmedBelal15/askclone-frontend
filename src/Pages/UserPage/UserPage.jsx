@@ -14,13 +14,17 @@ const UserPage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [like, setLike] = useState(false);
+  const [userData, setUserData] = useState({
+    userName:'',
+    imagePath: '',
+    isFollowed: true,
+  })
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const Logout = useStore(state => state.setLogout)
   const profileId = useParams().id;
-  // const history = useHistory()
-  // if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
+  const history = useHistory()
+  if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
 
   //handleSubmit for Asking a Question
   const handleSubmit = async (e) => {
@@ -49,6 +53,27 @@ const UserPage = () => {
       localStorage.setItem("user", JSON.stringify(data[1]));
     }
   };
+
+  //Fetching user data
+  useEffect(()=>{
+    (async function(){
+      const userResponse = await fetch(`http://localhost:4000/user/getuserandimage/${profileId}`, {
+        method: 'get',
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        }
+      })
+      const userData = (await userResponse.json()).payload[0]
+      if(userData.user_image != null){
+        var userImage = userData.user_image.replace(/\\/g, "/").substring("".length);
+      }
+      const userName = userData.user_name
+      setUserData({userName,imagePath: `http://localhost:4000/${userImage}`,isFollowed: true})
+    })()
+  }, [])
+
 
   //Fetching user Answers
   let isMounted = true
@@ -84,11 +109,15 @@ const UserPage = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{'placeholder'} profile</title>
+        <title>{userData.userName} profile</title>
       </Helmet>
       <HomePageNav />
       <div className="profile-page-container">
-        <ProfileBoxHeader />
+        <ProfileBoxHeader
+        profilename = {userData.userName}
+        image = {userData.imagePath}
+        isFollowed = {userData.isFollowed}
+        />
         <AddQuestion
           question={question}
           setQuestion={setQuestion}

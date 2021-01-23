@@ -111,6 +111,7 @@ const SettingsPage = () => {
             type="text"
             placeholder="Name"
             id="name"
+            required
             value={settings.name}
             onChange={(e) => setSettings({ ...settings, name: e.target.value })}
           />
@@ -143,6 +144,7 @@ const SettingsPage = () => {
           </label>
           <input
             type="email"
+            required
             id="email"
             value={settings.email}
             onChange={(e) =>

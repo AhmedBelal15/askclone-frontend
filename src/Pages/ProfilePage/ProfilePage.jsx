@@ -13,7 +13,10 @@ const ProfilePage = () => {
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [image, setImage] = useState('');
+  const [userData, setUserData] = useState({
+    userName: '',
+    userImage: ''
+  });
 
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
@@ -48,7 +51,7 @@ const ProfilePage = () => {
     (async function () {
       const userId = JSON.parse(localStorage.getItem('userId'))
       const response = await fetch(
-        `http://localhost:4000/user/getimage/${userId}`,
+        `http://localhost:4000/user/getuserandimage/${userId}`,
         {
           method: "get",
           headers: {
@@ -58,15 +61,20 @@ const ProfilePage = () => {
           },
         }
       );
-      const data = await response.json();
-      const newData = data.user_image.replace(/\\/g, "/").substring("".length);
-      if(!newData) return
-      setImage(`http://localhost:4000/${newData}`)
-      // console.log(`http://localhost:4000/${data.user_image}`);
+      const data = (await response.json()).payload[0]
+      let newData
+      if(data.user_image != null){
+        newData = data.user_image.replace(/\\/g, "/").substring("".length);
+      }else{newData= ''}
+
+      setUserData({
+        userName: data.user_name,
+        userImage: newData
+      })
+      
     })();
     // eslint-disable-next-line
   }, []);
-
   //handle question submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,7 +107,7 @@ const ProfilePage = () => {
       </div>
       <HomePageNav />
       <div className="profile-page-container">
-        <ProfileBoxHeader image={image} isVisible="none" />
+        <ProfileBoxHeader image={`http://localhost:4000/${userData.userImage}`} isFollowVisible="none" profilename={userData.userName} />
         <AddQuestion
           question={question}
           setQuestion={setQuestion}
