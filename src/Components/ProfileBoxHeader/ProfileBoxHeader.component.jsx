@@ -1,17 +1,90 @@
-import { useState } from "react"
-import "./profile-box-header.style.css"
-const ProfileBoxHeader = ({image, isFollowVisible, profilename}) =>{
-// const profilename = JSON.parse(localStorage.getItem('userName'))
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./profile-box-header.style.css";
+const ProfileBoxHeader = ({ image, isFollowVisible, profilename }) => {
+  //Initialize State for the values of the button
+  const [followed, setFollowed] = useState(false);
+  //get data from localstorage
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  //required user
+  const userId = useParams().id;
 
-    return(
-        <div className='profile-header'>
-            <div className='profilebox'>
-            <span className='profilebox-name'>{profilename}</span>
-            <button style={{display: isFollowVisible}}>Follow</button>
-            </div>
-            <span className='profilebox-image' style={{backgroundImage: `url(${image})`}}></span>
-        </div>
-    )
-}
+  // check following status
+  useEffect(() => {
+    if(isFollowVisible === 'none'){return}
+    (async function () {
+      const response = await fetch(
+        `http://localhost:4000/checkfollow/${userId}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200 && data === "success") {
+        setFollowed(true);
+      } else if (
+        response.status === 200 &&
+        data === "User 1 isn't following user 2"
+      ) {
+        setFollowed(false);
+      }
+    })();
+    // eslint-disable-next-line
+  }, []);
 
-export default ProfileBoxHeader
+  //handle Following/ Unfollowing
+  const handleClick = async () => {
+    if (followed) {
+      const response = await fetch(`http://localhost:4000/unfollow/${userId}`, {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      });
+      const data = await response.json();
+
+      if (response.status === 200 && data === "unfollowed") {
+        setFollowed(false);
+      }
+    } else {
+      const response = await fetch(`http://localhost:4000/follow/${userId}`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      });
+      const data = await response.json();
+
+      if (response.status === 200 && data === "followed") {
+        setFollowed(true);
+      }
+    }
+  };
+
+  return (
+    <div className="profile-header">
+      <div className="profilebox">
+        <span className="profilebox-name">{profilename}</span>
+        <button onClick={handleClick} style={{ display: isFollowVisible }}>
+          {followed ? "Unfollow" : "Follow"}
+        </button>
+      </div>
+      <span
+        className="profilebox-image"
+        style={{ backgroundImage: `url(${image})` }}
+      ></span>
+    </div>
+  );
+};
+
+export default ProfileBoxHeader;
