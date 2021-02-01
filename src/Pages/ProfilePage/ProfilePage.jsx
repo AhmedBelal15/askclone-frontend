@@ -96,7 +96,31 @@ const ProfilePage = () => {
     tokensRefresher(data);
     setQuestion("");
   };
-console.log(answers);
+  //Handle answer delete
+  //handle delete function
+  const handleAnswerDelete = async (id) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this answer?\n note that the question will be returned to question page"
+      )
+    ) {
+      try {
+        await fetch(`http://localhost:4000/questions/removeAnswer/${id}`, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        });
+        const newAnswers = answers.filter((answer) => answer.question_id !== id);
+        setAnswers(newAnswers);
+      } catch (error) {
+        alert("error");
+      }
+    }
+  };
+
   return (
     <>
       <div className="application">
@@ -130,7 +154,9 @@ console.log(answers);
                 likedBy={answer.liked_by}
                 questionId={answer.question_id}
                 image={answer.answer_image}
-                senderId = {answer.sender_id}
+                senderId={answer.sender_id}
+                deleteHidden={false}
+                handleAnswerDelete={handleAnswerDelete}
               />
             </div>
           );

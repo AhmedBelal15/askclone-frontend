@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ReactComponent as Heart } from "../../Assets/questions-icons/heart.svg";
 import tokensRefresher from "../../helpers/tokensRefresher";
+import { ReactComponent as DeleteIcon } from "../../Assets/questions-icons/delete-icon.svg";
 
 const AnswerModel = ({
   question,
@@ -13,6 +14,8 @@ const AnswerModel = ({
   questionId,
   image,
   senderId,
+  deleteHidden,
+  handleAnswerDelete
 }) => {
   const [userData, setUserData] = useState({
     backgroundImage: "",
@@ -26,20 +29,25 @@ const AnswerModel = ({
   //get username and image
   useEffect(() => {
     (async function () {
-      const respose = await fetch(`http://localhost:4000/user/getuserandimage/${senderId}`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          "access-token": `Bearer ${accessToken}`,
-          "refresh-token": refreshToken,
-        },
-      });
-      const data = (await respose.json()).payload[0]
-      data.user_image = data.user_image.replace(/\\/g, "/").substring("".length);
+      const respose = await fetch(
+        `http://localhost:4000/user/getuserandimage/${senderId}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = (await respose.json()).payload[0];
+      data.user_image = data.user_image
+        .replace(/\\/g, "/")
+        .substring("".length);
       setUserData({
         backgroundImage: data.user_image,
-        userName: data.user_name
-      })
+        userName: data.user_name,
+      });
     })();
   }, []);
 
@@ -99,15 +107,19 @@ const AnswerModel = ({
       }
     }
   };
+
   let visible;
   !isAnonymous ? (visible = "inline-block") : (visible = "none");
   return (
     <div className="answer-model">
+      <DeleteIcon onClick={()=>handleAnswerDelete(questionId)} className={`delete-answer ${deleteHidden? 'hidden': null}`} />
       <div className="question-container">
         <p className="question">{question}</p>
         <div className="author" style={{ display: visible }}>
           <span
-            style={{ backgroundImage: `url('http://localhost:4000/${userData.backgroundImage}')` }}
+            style={{
+              backgroundImage: `url('http://localhost:4000/${userData.backgroundImage}')`,
+            }}
             alt="placeholder"
             className="answer-image"
           ></span>
