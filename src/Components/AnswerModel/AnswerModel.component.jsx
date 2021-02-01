@@ -11,33 +11,53 @@ const AnswerModel = ({
   isAnonymous,
   likedBy,
   questionId,
-  image
+  image,
+  senderId,
 }) => {
-  const [backgroundImage, setBackgroundImage] = useState(
-    "https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg"
-  );
+  const [userData, setUserData] = useState({
+    backgroundImage: "",
+    userName: "",
+  });
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const userId = JSON.parse(localStorage.getItem("userId"));
   const [like, setLike] = useState(false);
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  //get username and image
+  useEffect(() => {
+    (async function () {
+      const respose = await fetch(`http://localhost:4000/user/getuserandimage/${senderId}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      });
+      const data = (await respose.json()).payload[0]
+      data.user_image = data.user_image.replace(/\\/g, "/").substring("".length);
+      setUserData({
+        backgroundImage: data.user_image,
+        userName: data.user_name
+      })
+    })();
+  }, []);
 
   //likes visibility effect
   useEffect(() => {
     if (likedBy != undefined && likedBy.includes(userId)) {
-      setLike(true)
+      setLike(true);
     } else {
-      setLike(false)
+      setLike(false);
     }
   }, []);
 
   //likes count effect
-  useEffect(()=>{
-    if(likedBy != undefined){
-      setCount(likedBy.length)
+  useEffect(() => {
+    if (likedBy != undefined) {
+      setCount(likedBy.length);
     }
-  },[])
-
+  }, []);
 
   const handleLike = async () => {
     //handleLike
@@ -57,7 +77,7 @@ const AnswerModel = ({
       tokensRefresher(data);
       if (response.status === 200) {
         setLike(true);
-        setCount(currentCount => currentCount + 1)
+        setCount((currentCount) => currentCount + 1);
       }
     } else {
       const response = await fetch(
@@ -75,7 +95,7 @@ const AnswerModel = ({
       tokensRefresher(data);
       if (response.status === 200) {
         setLike(false);
-        setCount(currentCount => currentCount - 1)
+        setCount((currentCount) => currentCount - 1);
       }
     }
   };
@@ -87,12 +107,12 @@ const AnswerModel = ({
         <p className="question">{question}</p>
         <div className="author" style={{ display: visible }}>
           <span
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            style={{ backgroundImage: `url('http://localhost:4000/${userData.backgroundImage}')` }}
             alt="placeholder"
             className="answer-image"
           ></span>
-          <Link to="#" className="profile-link">
-            profile name placeholder
+          <Link to={`/user/${senderId}`} className="profile-link">
+            {userData.userName}
           </Link>
         </div>
       </div>
@@ -103,7 +123,9 @@ const AnswerModel = ({
       </span>
 
       <article className="answer">{answer}</article>
-      {image?<img src={`http://localhost:4000/${image}`} alt="answer-image"/>:null}
+      {image ? (
+        <img src={`http://localhost:4000/${image}`} alt="answer-image" />
+      ) : null}
       <div className="answer-likes">
         <Heart
           onClick={handleLike}
@@ -111,7 +133,6 @@ const AnswerModel = ({
         />
         <p className="likes-count">{count}</p>
       </div>
-
     </div>
   );
 };

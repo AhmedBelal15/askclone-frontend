@@ -137,6 +137,7 @@ const UserPage = () => {
                 likedBy={answer.liked_by}
                 questionId={answer.question_id}
                 image={answer.answer_image}
+                senderId = {answer.sender_id}
                 />
               </div>
             );

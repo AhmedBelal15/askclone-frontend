@@ -96,7 +96,7 @@ const ProfilePage = () => {
     tokensRefresher(data);
     setQuestion("");
   };
-
+console.log(answers);
   return (
     <>
       <div className="application">
@@ -130,6 +130,7 @@ const ProfilePage = () => {
                 likedBy={answer.liked_by}
                 questionId={answer.question_id}
                 image={answer.answer_image}
+                senderId = {answer.sender_id}
               />
             </div>
           );
