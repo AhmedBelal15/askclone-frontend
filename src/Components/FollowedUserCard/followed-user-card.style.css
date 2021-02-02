@@ -7,17 +7,16 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    margin-top: 8px;
 }
 
 .followed-user-image{
     height: 70px;
     width: 70px;
     border-radius: 50%;
-    background: chocolate;
     overflow: hidden;
-    background: url('https://d2halst20r4hcy.cloudfront.net/6b7/9fe81/3833/415d/8e93/389851cfad74/normal/55473.jpg') no-repeat;
+    background: no-repeat;
     background-position: center; 
-    background-size: 70px auto;
     margin: 0 15px;
     box-shadow: 0px 0px 0px 4px gray;
 }

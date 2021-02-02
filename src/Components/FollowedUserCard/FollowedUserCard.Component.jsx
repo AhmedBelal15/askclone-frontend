@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom'
 import './followed-user-card.style.css'
 
-const FollowedUserCard = () => {
+const FollowedUserCard = ({username, userImage, userId}) => {
     return (
     <div className='followed-user-card'>
-        <Link to='#' className='followed-user'>
-        <div className='followed-user-image'></div>
-        <span>Ahmed Belal</span>
+        <Link to={`/user/${userId}`} className='followed-user'>
+        <div style={userImage?{background: `url(http://localhost:4000/${userImage})`, backgroundSize: 'cover'}: null} className='followed-user-image'></div>
+        <span>{username}</span>
         </Link>
     </div>
     )
