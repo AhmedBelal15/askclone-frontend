@@ -15,39 +15,15 @@ const AnswerModel = ({
   image,
   senderId,
   deleteHidden,
-  handleAnswerDelete
+  userImage,
+  userName,
+  handleAnswerDelete,
 }) => {
-  const [userData, setUserData] = useState({
-    backgroundImage: "",
-    userName: "",
-  });
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const userId = JSON.parse(localStorage.getItem("userId"));
   const [like, setLike] = useState(false);
   const [count, setCount] = useState(0);
-  //get username and image
-  useEffect(() => {
-    (async function () {
-      const respose = await fetch(
-        `http://localhost:4000/user/getuserandimage/${senderId}`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "access-token": `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-      const data = (await respose.json()).payload[0];
-      data.user_image = data.user_image
-      setUserData({
-        backgroundImage: data.user_image,
-        userName: data.user_name,
-      });
-    })();
-  }, []);
 
   //likes visibility effect
   useEffect(() => {
@@ -110,28 +86,30 @@ const AnswerModel = ({
   !isAnonymous ? (visible = "inline-block") : (visible = "none");
   return (
     <div className="answer-model">
-      <DeleteIcon onClick={()=>handleAnswerDelete(questionId)} className={`delete-answer ${deleteHidden? 'hidden': null}`} />
+      <DeleteIcon
+        onClick={() => handleAnswerDelete(questionId)}
+        className={`delete-answer ${deleteHidden ? "hidden" : null}`}
+      />
       <div className="question-container">
         <p className="question">{question}</p>
         <div className="author" style={{ display: visible }}>
           <span
             style={{
-              backgroundImage: `url('http://localhost:4000/${userData.backgroundImage}')`,
+              backgroundImage: `url('http://localhost:4000/${userImage}')`,
             }}
-            alt="placeholder"
+            alt="user-image"
             className="answer-image"
           ></span>
           <Link to={`/user/${senderId}`} className="profile-link">
-            {userData.userName}
+            {userName}
           </Link>
         </div>
       </div>
-
-      <span className="from-period">
-        {" "}
-        {answeredDate ? answeredDate.substring(0, 10) : "placeholder"}{" "}
-      </span>
-
+      <Link to={`/answer/${questionId}`} className='decoration-none'>
+        <span className="from-period">
+          {answeredDate ? answeredDate.substring(0, 10) : null}
+        </span>
+      </Link>
       <article className="answer">{answer}</article>
       {image ? (
         <img src={`http://localhost:4000/${image}`} alt="answer-image" />

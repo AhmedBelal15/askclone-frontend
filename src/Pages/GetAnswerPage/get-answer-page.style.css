@@ -1,0 +1,11 @@
+.answer-page-container{
+    min-height: 100vh;
+    background: #2d3238;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.one-answer{
+    margin-top: 100px;
+}

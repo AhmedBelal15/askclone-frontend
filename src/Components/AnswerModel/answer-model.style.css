@@ -99,3 +99,7 @@
 .hidden{
     display: none;
 }
+
+.decoration-none{
+    text-decoration: none;
+}

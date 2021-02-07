@@ -14,6 +14,7 @@ import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 import UserPage from "./Pages/UserPage/UserPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import FriendsPage from "./Pages/FriendsPage/FriendsPage";
+import GetAnswerPage from "./Pages/GetAnswerPage/GetAnswerPage.jsx";
 
 
 function App() {
@@ -103,6 +104,14 @@ function App() {
         path="/following"
         render={() => (!login ? <Redirect to="/login" /> : <FriendsPage />)}
       />
+
+      <Route
+        exact
+        path="/answer/:answerid"
+        render={() => (!login ? <Redirect to="/login" /> : <GetAnswerPage />)}
+      />
+
+
     </Router>
   );
 }

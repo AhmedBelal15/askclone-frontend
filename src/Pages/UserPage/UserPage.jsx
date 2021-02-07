@@ -138,6 +138,8 @@ const UserPage = () => {
                 questionId={answer.question_id}
                 image={answer.answer_image}
                 senderId = {answer.sender_id}
+                userName={answer.user_name}
+                userImage={answer.user_image}
                 deleteHidden={true}
                 />
               </div>

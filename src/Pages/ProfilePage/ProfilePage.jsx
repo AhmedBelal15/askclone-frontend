@@ -157,6 +157,8 @@ const ProfilePage = () => {
                 senderId={answer.sender_id}
                 deleteHidden={false}
                 handleAnswerDelete={handleAnswerDelete}
+                userName={answer.user_name}
+                userImage={answer.user_image}
               />
             </div>
           );
