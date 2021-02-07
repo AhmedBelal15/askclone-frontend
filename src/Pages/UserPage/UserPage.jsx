@@ -67,7 +67,7 @@ const UserPage = () => {
       })
       const userData = (await userResponse.json()).payload[0]
       if(userData.user_image != null){
-        var userImage = userData.user_image.replace(/\\/g, "/").substring("".length);
+        var userImage = userData.user_image;
       }
       const userName = userData.user_name
       setUserData({userName,imagePath: `http://localhost:4000/${userImage}`,isFollowed: true})

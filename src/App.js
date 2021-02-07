@@ -14,8 +14,10 @@ import AddAnswerPage from "./Pages/AddAnswerPage/AddAnswerPage";
 import UserPage from "./Pages/UserPage/UserPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import FriendsPage from "./Pages/FriendsPage/FriendsPage";
+
+
 function App() {
-  // Trying Zustand
+  // Zustand State management
   const login = useStore((state) => state.login);
   const setLogin = useStore((state) => state.setLogin);
   const getLoggedIn = localStorage.getItem("loggedIn");
@@ -23,6 +25,7 @@ function App() {
     setLogin();
   }
 
+////////////////////////////
   return (
     <Router>
       <Route

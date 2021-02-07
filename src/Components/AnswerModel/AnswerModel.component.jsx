@@ -42,8 +42,6 @@ const AnswerModel = ({
       );
       const data = (await respose.json()).payload[0];
       data.user_image = data.user_image
-        .replace(/\\/g, "/")
-        .substring("".length);
       setUserData({
         backgroundImage: data.user_image,
         userName: data.user_name,

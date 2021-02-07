@@ -64,7 +64,7 @@ const ProfilePage = () => {
       const data = (await response.json()).payload[0];
       let newData;
       if (data.user_image != null) {
-        newData = data.user_image.replace(/\\/g, "/").substring("".length);
+        newData = data.user_image;
       } else {
         newData = "";
       }

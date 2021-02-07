@@ -40,7 +40,7 @@ const FriendsPage = () => {
           userData.map(user => {
               return(
                   <div key={user.is_following}>
-                      <FollowedUserCard username={user.user_name} userImage={user.user_image? user.user_image.replace(/\\/g, "/").substring("".length) : null} userId={user.is_following} />
+                      <FollowedUserCard username={user.user_name} userImage={user.user_image} userId={user.is_following} />
                   </div>
               )
           })
