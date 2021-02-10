@@ -24,12 +24,7 @@ const AnswerModel = ({
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const userId = JSON.parse(localStorage.getItem("userId"));
   const [like, setLike] = useState(false);
-  const [count, setCount] = useState(0);
-
-  //likes count effect
-  useEffect(() => {
-    setCount(numberOfLikes);
-  }, []);
+  const [count, setCount] = useState(numberOfLikes);
 
   //likes visibility effect
   useEffect(() => {

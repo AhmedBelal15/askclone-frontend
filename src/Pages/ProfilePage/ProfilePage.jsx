@@ -21,6 +21,8 @@ const ProfilePage = () => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const Logout = useStore((state) => state.setLogout);
+
+  //getting answers
   useEffect(() => {
     (async function () {
       const response = await fetch(
@@ -47,6 +49,7 @@ const ProfilePage = () => {
     // eslint-disable-next-line
   }, []);
 
+//get profilebox data
   useEffect(() => {
     (async function () {
       const userId = JSON.parse(localStorage.getItem("userId"));
@@ -76,6 +79,7 @@ const ProfilePage = () => {
     })();
     // eslint-disable-next-line
   }, []);
+
   //handle question submit
   const handleSubmit = async (e) => {
     e.preventDefault();
