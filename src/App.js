@@ -1,7 +1,7 @@
 import "./App.css";
 import useStore from "./Zustand/AuthZustand";
 import MainPage from "./Pages/MainPage/MainPage";
-import {BrowserRouter as Router, Route, Redirect,} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
@@ -15,7 +15,10 @@ import UserPage from "./Pages/UserPage/UserPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import FriendsPage from "./Pages/FriendsPage/FriendsPage";
 import GetAnswerPage from "./Pages/GetAnswerPage/GetAnswerPage.jsx";
-
+import socket from "./WebSockets/WebsocketConnection";
+import { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+const userId = JSON.parse(localStorage.getItem('userId'))
 
 function App() {
   // Zustand State management
@@ -25,10 +28,16 @@ function App() {
   if (getLoggedIn === "true" && login === false) {
     setLogin();
   }
-
-////////////////////////////
+  ////////////////////////////
+useEffect(()=>{
+  socket.emit('connected', userId)
+}, [])
+  ////////////////////////////
   return (
     <Router>
+      <Link to='/notifications'>
+      <Toaster position="bottom-right" reverseOrder={false} />
+      </Link>
       <Route
         exact
         path="/"
@@ -110,8 +119,6 @@ function App() {
         path="/answer/:answerid"
         render={() => (!login ? <Redirect to="/login" /> : <GetAnswerPage />)}
       />
-
-
     </Router>
   );
 }
