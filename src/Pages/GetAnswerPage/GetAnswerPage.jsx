@@ -29,7 +29,7 @@ const GetAnswerPage = () => {
         
     })();
   }, []);
-  console.log(answer);
+
   return (
     <>
       <Helmet>
@@ -44,12 +44,14 @@ const GetAnswerPage = () => {
           answer={answer.answer}
           isAnonymous={answer.is_anonymous}
           likedBy={answer.liked_by}
+          numberOfLikes={answer.liked_by? answer.liked_by.length : 0}
           questionId={answer.question_id}
           image={answer.answer_image}
           senderId={answer.sender_id}
           userName= {answer.user_name}
           userImage = {answer.user_image}
           deleteHidden={true}
+          handleAnswerDelete={()=>null}
         />
         </div>
       </div>

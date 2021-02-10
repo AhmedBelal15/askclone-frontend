@@ -11,6 +11,7 @@ const AnswerModel = ({
   answer,
   isAnonymous,
   likedBy,
+  numberOfLikes,
   questionId,
   image,
   senderId,
@@ -25,19 +26,17 @@ const AnswerModel = ({
   const [like, setLike] = useState(false);
   const [count, setCount] = useState(0);
 
+  //likes count effect
+  useEffect(() => {
+    setCount(numberOfLikes);
+  }, []);
+
   //likes visibility effect
   useEffect(() => {
     if (likedBy != undefined && likedBy.includes(userId)) {
       setLike(true);
     } else {
       setLike(false);
-    }
-  }, []);
-
-  //likes count effect
-  useEffect(() => {
-    if (likedBy != undefined) {
-      setCount(likedBy.length);
     }
   }, []);
 
@@ -105,7 +104,7 @@ const AnswerModel = ({
           </Link>
         </div>
       </div>
-      <Link to={`/answer/${questionId}`} className='decoration-none'>
+      <Link to={`/answer/${questionId}`} className="decoration-none">
         <span className="from-period">
           {answeredDate ? answeredDate.substring(0, 10) : null}
         </span>

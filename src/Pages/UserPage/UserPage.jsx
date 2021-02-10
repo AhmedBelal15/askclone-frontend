@@ -135,6 +135,7 @@ const UserPage = () => {
                 answer={answer.answer}
                 isAnonymous={answer.is_anonymous}
                 likedBy={answer.liked_by}
+                numberOfLikes={answer.liked_by? answer.liked_by.length : 0}
                 questionId={answer.question_id}
                 image={answer.answer_image}
                 senderId = {answer.sender_id}
