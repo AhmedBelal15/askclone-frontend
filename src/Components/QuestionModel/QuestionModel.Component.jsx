@@ -15,7 +15,7 @@ const QuestionModel = ({ question, date, handleDelete, questionId }) => {
         <Link to={`/answerquestion/${questionId}`}>
           <button>Answer {">"}</button>
         </Link>
-        <p className="from-period">{date? date.substring(0, 10) : 'placeholder'}</p>
+        <p className="from-period">{date? date.substring(0, 10) : null}</p>
       </div>
     </div>
   );

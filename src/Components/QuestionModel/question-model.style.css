@@ -30,6 +30,7 @@
   grid-area: 2 / 2 / 3 / 3;
   font-size: 19px;
   font-weight: bold;
+  word-break: break-all
 }
 
 .question-bottom button{

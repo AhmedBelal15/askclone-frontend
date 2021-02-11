@@ -85,7 +85,9 @@ const AnswerModel = ({
         className={`delete-answer ${deleteHidden ? "hidden" : null}`}
       />
       <div className="question-container">
+        <div className='question-text-container'>
         <p className="question">{question}</p>
+        </div>
         <div className="author" style={{ display: visible }}>
           <span
             style={{

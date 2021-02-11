@@ -11,4 +11,12 @@ const socket = io('http://localhost:4000')
 socket.on('like', (msg)=>{
     notify(msg)
 })
+socket.on('question', (msg)=>{
+    notify(msg)
+})
+
+socket.on('answer', (msg)=>{
+    notify(msg)
+})
+
 export default socket

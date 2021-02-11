@@ -1,0 +1,39 @@
+.notification-card{
+    width: 500px;
+    height: 80px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 5px 0px;
+}
+
+.notification-image{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
+.notification{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.notification-description{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+.notification-description span {
+    color: #ee1144;
+}
+
+.notification-link{
+    text-decoration: none;
+    color: black;
+}

@@ -18,6 +18,7 @@ import GetAnswerPage from "./Pages/GetAnswerPage/GetAnswerPage.jsx";
 import socket from "./WebSockets/WebsocketConnection";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
+import NotificationPage from "./Pages/NotificationPage/NotificationPage";
 const userId = JSON.parse(localStorage.getItem('userId'))
 
 function App() {
@@ -119,6 +120,13 @@ useEffect(()=>{
         path="/answer/:answerid"
         render={() => (!login ? <Redirect to="/login" /> : <GetAnswerPage />)}
       />
+
+      <Route
+        exact
+        path="/notifications"
+        render={() => (!login ? <Redirect to="/login" /> : <NotificationPage />)}
+      />
+      
     </Router>
   );
 }

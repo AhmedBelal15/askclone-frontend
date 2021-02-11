@@ -22,7 +22,9 @@
     color: #2b3237;
     display: inline;
 }
-
+.question-text-container{
+    width: 90%;
+}
 .answer-model .author {
 
     font-size: 12px;
