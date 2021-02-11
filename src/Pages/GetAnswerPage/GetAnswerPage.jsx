@@ -1,5 +1,5 @@
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
-import AnswerModel from "../../Components/AnswerModel/AnswerModel.component";
+import AnswerModelWithAuthor from "../../Components/AnswerModelWithAuthor/AnswerModelWithAuthor.Component";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -38,7 +38,7 @@ const GetAnswerPage = () => {
       <HomePageNav />
       <div className="answer-page-container">
         <div className='one-answer'>
-        <AnswerModel
+        <AnswerModelWithAuthor
           question={answer.question}
           answeredDate={answer.answered_date}
           answer={answer.answer}
