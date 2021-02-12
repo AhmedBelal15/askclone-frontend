@@ -1,0 +1,21 @@
+.answer-author{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+
+}
+.author-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.answer-author span{
+    font-size: 22px;
+    font-weight: bold;
+}
+.decoration-none{
+    text-decoration: none;
+    color: #ee1144;
+}

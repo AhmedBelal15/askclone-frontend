@@ -1,0 +1,77 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ReactComponent as Heart } from "../../Assets/questions-icons/heart.svg";
+import "./answer-model-with-author.style.css";
+const AnswerModelWithAuthor = ({
+  answer,
+  answerImage,
+  answeredDate,
+  authorImage,
+  authorName,
+  isQuestionAnonymous,
+  question,
+  likeStatus,
+  questionerName,
+  questionerImage,
+  senderId,
+  recieverId,
+  handleLike,
+  likesCount
+}) => {
+    
+
+
+  let visible;
+  !isQuestionAnonymous ? (visible = "inline-block") : (visible = "none");
+  return (
+    <div className="answer-model">
+      <div className="question-container">
+        <div className="question-text-container">
+          <p className="question">{question}</p>
+        </div>
+        <div className="author" style={{ display: visible }}>
+          <span
+            style={{
+              backgroundImage: `url('http://localhost:4000/${questionerImage}')`,
+            }}
+            className="answer-image"
+          ></span>
+          <Link to={`/user/${senderId}`} className="profile-link">
+            {questionerName}
+          </Link>
+        </div>
+        <div className="answer-author"></div>
+      </div>
+
+      <span className="from-period">
+        {answeredDate ? answeredDate.substring(0, 10) : null}
+      </span>
+      <div className="answer-author">
+        <span
+          className="author-image"
+          style={{
+            backgroundImage: `url("http://localhost:4000/${authorImage}")`,
+            backgroundPosition: 'center',
+            backgroundSize: "cover",
+          }}
+        ></span>
+        <Link className="decoration-none" to={`/user/${recieverId}`}>
+          <span>{authorName}</span>
+        </Link>
+      </div>
+      <article className="answer">{answer}</article>
+      {answerImage ? (
+        <img src={`http://localhost:4000/${answerImage}`} alt="answer-image" />
+      ) : null}
+      <div className="answer-likes">
+        <Heart
+          onClick={handleLike}
+          className={`heart-icon ${likeStatus ? "fill-red" : "fill-gray"}`}
+        />
+        <p className="likes-count">{likesCount}</p>
+      </div>
+    </div>
+  );
+};
+
+export default AnswerModelWithAuthor;
