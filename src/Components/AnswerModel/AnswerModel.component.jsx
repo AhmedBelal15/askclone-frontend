@@ -108,7 +108,7 @@ const AnswerModel = ({
       </Link>
       <article className="answer">{answer}</article>
       {image ? (
-        <img src={`http://localhost:4000/${image}`} alt="answer-image" />
+        <img src={`http://localhost:4000/${image}`} alt="answer" />
       ) : null}
       <div className="answer-likes">
         <Heart

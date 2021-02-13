@@ -82,7 +82,9 @@ const MainPage = () => {
             <AskLogo className="social-logo" />
             <FacebookLogo className="social-logo" />
             <InstagramLogo className="social-logo" />
+            <a href='https://github.com/AhmedBelal15'>
             <GithubLogo className="social-logo" />
+            </a>
             <TwitterLogo className="social-logo" />
           </div>
         </div>

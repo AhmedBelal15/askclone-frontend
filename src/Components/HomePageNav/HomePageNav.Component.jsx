@@ -19,7 +19,7 @@ const HomePageNav = () => {
     setLogoutPopup(!logoutPopup)
     
   }
-  const handleLogout = () => {}
+
   return (
    
     <>

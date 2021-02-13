@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage/ForgotPasswordPage";
-import HomePage from "./Pages/HomePage/HomePage";
+import NewsFeedPage from "./Pages/NewsFeedPage/NewsFeedPage";
 import NewPasswordPage from "./Pages/NewPasswordPage/NewPasswordPage";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
@@ -78,7 +78,7 @@ useEffect(()=>{
       <Route
         exact
         path="/home"
-        render={() => (!login ? <Redirect to="/login" /> : <HomePage />)}
+        render={() => (!login ? <Redirect to="/login" /> : <NewsFeedPage />)}
       />
 
       <Route

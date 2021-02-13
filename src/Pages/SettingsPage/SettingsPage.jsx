@@ -205,7 +205,7 @@ const SettingsPage = () => {
           {settings.imagePath ? (
             <img
               src={`http://localhost:4000/${settings.imagePath}`}
-              alt="profile picture"
+              alt="profile"
               className="settings-profile-image"
             />
           ) : null}

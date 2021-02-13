@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Heart } from "../../Assets/questions-icons/heart.svg";
 import "./answer-model-with-author.style.css";
@@ -61,7 +60,7 @@ const AnswerModelWithAuthor = ({
       </div>
       <article className="answer">{answer}</article>
       {answerImage ? (
-        <img src={`http://localhost:4000/${answerImage}`} alt="answer-image" />
+        <img src={`http://localhost:4000/${answerImage}`} alt="answer" />
       ) : null}
       <div className="answer-likes">
         <Heart

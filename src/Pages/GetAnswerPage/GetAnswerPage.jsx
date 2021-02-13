@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import tokensRefresher from '../../helpers/tokensRefresher'
+import handleLike from '../../helpers/handleLike'
 import "./get-answer-page.style.css";
 const GetAnswerPage = () => {
   const [answer, setAnswer] = useState({});
@@ -38,46 +39,47 @@ const GetAnswerPage = () => {
   }, []);
 //Handle Like
 
-const handleLike = async () => {
-  //handleLike
-  if (!likeStatus) {
-    const response = await fetch(
-      `http://localhost:4000/questions/addlike/${questionId}`,
-      {
-        method: "put",
-        headers: {
-          "Content-Type": "application/json",
-          "access-token": `Bearer ${accessToken}`,
-          "refresh-token": refreshToken,
-        },
-      }
-    );
-    const data = await response.json();
-    tokensRefresher(data);
-    if (response.status === 200) {
-      setLikeStatus(true);
-      setLikesCount((currentCount) => currentCount + 1);
-    }
-  } else {
-    const response = await fetch(
-      `http://localhost:4000/questions/removelike/${questionId}`,
-      {
-        method: "put",
-        headers: {
-          "Content-Type": "application/json",
-          "access-token": `Bearer ${accessToken}`,
-          "refresh-token": refreshToken,
-        },
-      }
-    );
-    const data = await response.json();
-    tokensRefresher(data);
-    if (response.status === 200) {
-      setLikeStatus(false);
-      setLikesCount((currentCount) => currentCount - 1);
-    }
-  }
-};
+// const handleLike = async () => {
+//   //handleLike
+//   if (!likeStatus) {
+//     const response = await fetch(
+//       `http://localhost:4000/questions/addlike/${questionId}`,
+//       {
+//         method: "put",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "access-token": `Bearer ${accessToken}`,
+//           "refresh-token": refreshToken,
+//         },
+//       }
+//     );
+//     const data = await response.json();
+//     tokensRefresher(data);
+//     if (response.status === 200) {
+//       setLikeStatus(true);
+//       setLikesCount((currentCount) => currentCount + 1);
+//     }
+//   } else {
+//     const response = await fetch(
+//       `http://localhost:4000/questions/removelike/${questionId}`,
+//       {
+//         method: "put",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "access-token": `Bearer ${accessToken}`,
+//           "refresh-token": refreshToken,
+//         },
+//       }
+//     );
+
+//     const data = await response.json();
+//     tokensRefresher(data);
+//     if (response.status === 200) {
+//       setLikeStatus(false);
+//       setLikesCount((currentCount) => currentCount - 1);
+//     }
+//   }
+// };
 
   return (
     <>
@@ -103,7 +105,7 @@ const handleLike = async () => {
           recieverId={answer.reciever_id}
           likeStatus={likeStatus}
           setLikeStatus={setLikeStatus}
-          handleLike={handleLike}
+          handleLike={()=>handleLike(likeStatus, setLikeStatus, setLikesCount, questionId)}
           likesCount={likesCount}
           setLikesCount={setLikesCount}
         />
