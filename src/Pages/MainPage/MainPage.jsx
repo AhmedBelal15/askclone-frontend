@@ -41,34 +41,34 @@ const MainPage = () => {
         </div>
       </div>
       <footer className="main-page-footer">
-        <h2>pictures placeholder</h2>
+        <h2>Side Project By: Ahmed Belal</h2>
         <ul>
           <li>
-            <a href="#">About ASKfm</a>
+            <Link to="/">About ASKfm</Link>
           </li>
           <li>
-            <a href="#">Safety center</a>
+            <Link to="/">Safety center</Link>
           </li>
           <li>
-            <a href="#">Help</a>
+            <Link to="/">Help</Link>
           </li>
           <li>
-            <a href="#">Community Guidelines</a>
+            <Link to="/">Community Guidelines</Link>
           </li>
           <li>
-            <a href="#">Terms of use</a>
+            <Link to="/">Terms of use</Link>
           </li>
           <li>
-            <a href="#">Privacy policy</a>
+            <Link to="/">Privacy policy</Link>
           </li>
           <li>
-            <a href="#"> Cookies policy</a>
+            <Link to="/"> Cookies policy</Link>
           </li>
           <li>
-            <a href="#">Advertising</a>
+            <Link to="/">Advertising</Link>
           </li>
           <li>
-            <a href="#">Professionals</a>
+            <Link to="/">Professionals</Link>
           </li>
         </ul>
         <hr />
