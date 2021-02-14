@@ -7,6 +7,7 @@ import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
 import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
 import tokensRefresher from "../../helpers/tokensRefresher";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./profile-page.style.css";
 
 const ProfilePage = () => {
@@ -20,6 +21,7 @@ const ProfilePage = () => {
 
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+  const userId = JSON.parse(localStorage.getItem("userId"));
   const Logout = useStore((state) => state.setLogout);
 
   //getting answers
@@ -49,10 +51,9 @@ const ProfilePage = () => {
     // eslint-disable-next-line
   }, []);
 
-//get profilebox data
+  //get profilebox data
   useEffect(() => {
     (async function () {
-      const userId = JSON.parse(localStorage.getItem("userId"));
       const response = await fetch(
         `http://localhost:4000/user/getuserandimage/${userId}`,
         {
@@ -117,7 +118,9 @@ const ProfilePage = () => {
             "refresh-token": refreshToken,
           },
         });
-        const newAnswers = answers.filter((answer) => answer.question_id !== id);
+        const newAnswers = answers.filter(
+          (answer) => answer.question_id !== id
+        );
         setAnswers(newAnswers);
       } catch (error) {
         alert("error");
@@ -134,12 +137,20 @@ const ProfilePage = () => {
         </Helmet>
       </div>
       <HomePageNav />
+
       <div className="profile-page-container">
-        <ProfileBoxHeader
-          image={`http://localhost:4000/${userData.userImage}`}
-          isFollowVisible="none"
-          profilename={userData.userName}
-        />
+        <div className="reverse-row">
+          <ProfileBoxHeader
+            image={`http://localhost:4000/${userData.userImage}`}
+            isFollowVisible="none"
+            profilename={userData.userName}
+          />
+
+          <CopyToClipboard text={`http://localhost:3000/user/${userId}`}>
+            <div className="copy-div" title="Copy Profile Link"></div>
+          </CopyToClipboard>
+        </div>
+
         <AddQuestion
           question={question}
           setQuestion={setQuestion}
@@ -156,7 +167,7 @@ const ProfilePage = () => {
                 answer={answer.answer}
                 isAnonymous={answer.is_anonymous}
                 likedBy={answer.liked_by}
-                numberOfLikes={answer.liked_by? answer.liked_by.length : 0}
+                numberOfLikes={answer.liked_by ? answer.liked_by.length : 0}
                 questionId={answer.question_id}
                 image={answer.answer_image}
                 senderId={answer.sender_id}
