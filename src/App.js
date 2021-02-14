@@ -78,53 +78,56 @@ useEffect(()=>{
       <Route
         exact
         path="/home"
-        render={() => (!login ? <Redirect to="/login" /> : <NewsFeedPage />)}
+        component={NewsFeedPage}
       />
 
       <Route
         exact
         path="/profile"
-        render={() => (!login ? <Redirect to="/login" /> : <ProfilePage />)}
+        component={ProfilePage}
       />
       <Route
         exact
         path="/user/:id"
-        render={() => (!login ? <Redirect to="/login" /> : <UserPage />)}
+        component={UserPage}
       />
       <Route
         exact
         path="/questions"
-        render={() => (!login ? <Redirect to="/login" /> : <QuestionsPage />)}
+        component={QuestionsPage}
       />
 
       <Route
         exact
         path="/answerquestion/:questionid"
-        render={() => (!login ? <Redirect to="/login" /> : <AddAnswerPage />)}
+        component={AddAnswerPage}
       />
 
       <Route
         exact
         path="/settings"
-        render={() => (!login ? <Redirect to="/login" /> : <SettingsPage />)}
+        component={SettingsPage}
       />
 
       <Route
         exact
         path="/following"
-        render={() => (!login ? <Redirect to="/login" /> : <FriendsPage />)}
+        component={FriendsPage}
+
       />
 
       <Route
         exact
         path="/answer/:answerid"
-        render={() => (!login ? <Redirect to="/login" /> : <GetAnswerPage />)}
+        component={GetAnswerPage}
+
       />
 
       <Route
         exact
         path="/notifications"
-        render={() => (!login ? <Redirect to="/login" /> : <NotificationPage />)}
+        component={NotificationPage}
+
       />
       
     </Router>
