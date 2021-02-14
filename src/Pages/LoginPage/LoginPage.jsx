@@ -24,7 +24,7 @@ const LoginPage = () => {
       }),
     });
     const data = await response.json();
-    if (response.status === 200) {
+    if (response.status === 200 && data.message === 'logged in successfully') {
       localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
       localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken))
       localStorage.setItem('userName', JSON.stringify(data.username))
