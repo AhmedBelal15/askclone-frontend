@@ -81,18 +81,7 @@ const LoginPage = () => {
             />
           </div>
           <div className="inline-between">
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <input
-                type="checkbox"
-                name="checkbox"
-                className="form-checkbox"
-                value={values.rememberMe}
-                onChange={() =>
-                  setValues({ ...values, rememberMe: !values.rememberMe })
-                }
-              />
-              <label htmlFor="checkbox">Remember me</label>
-            </div>
+           
             <Link style={{ textDecoration: "none" }} to="forgot-password">
               <span>Forgot Password?</span>
             </Link>
