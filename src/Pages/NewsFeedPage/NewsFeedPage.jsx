@@ -35,7 +35,8 @@ useEffect(()=>{
       <HomePageNav />
       <div className="home-page">
         <div style={{ height: "50px" }}></div>
-       {answers.map(answer=>{
+        
+       {answers.length? answers.map(answer=>{
          return(
          <div key={answer.question_id}>
           <NewsFeedAnswerModel
@@ -54,7 +55,7 @@ useEffect(()=>{
         />
          </div>
          )
-       })}
+       }):  <div className='no-data-card'> <p>No answers available now <br/> Make sure to invite your friends and follow them</p> </div>}
       </div>
     </>
   );
