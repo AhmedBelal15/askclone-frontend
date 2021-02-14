@@ -15,7 +15,7 @@ const FriendsPage = () => {
   });
   useEffect(() => {
     (async function () {
-      const response = await fetch("http://localhost:4000/getfollowing", {
+      const response = await fetch("https://imcurious-backend.herokuapp.com/getfollowing", {
         method: "get",
         headers: {
           "Content-Type": "application/json",

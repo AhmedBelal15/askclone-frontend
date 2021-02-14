@@ -27,7 +27,7 @@ const AddAnswerPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/questions/getquestion/${questionId}`,
+        `https://imcurious-backend.herokuapp.com/questions/getquestion/${questionId}`,
         {
           method: "get",
           headers: {
@@ -55,7 +55,7 @@ const AddAnswerPage = () => {
     e.preventDefault();
     if (answer.text === "") return;
     const response = await fetch(
-      `http://localhost:4000/questions/addanswer/${questionId}`,
+      `https://imcurious-backend.herokuapp.com/questions/addanswer/${questionId}`,
       {
         method: "put",
         headers: {

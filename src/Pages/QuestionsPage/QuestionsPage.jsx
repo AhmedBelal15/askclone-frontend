@@ -16,7 +16,7 @@ const QuestionsPage = () => {
   //handle delete function
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:4000/questions/deletequestion/${id}`, {
+      await fetch(`https://imcurious-backend.herokuapp.com/questions/deletequestion/${id}`, {
         method: "delete",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const QuestionsPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        "http://localhost:4000/questions/getquestions",
+        "https://imcurious-backend.herokuapp.com/questions/getquestions",
         {
           method: "get",
           headers: {

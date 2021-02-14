@@ -12,7 +12,7 @@ const NotificationPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/users/notifications`,
+        `https://imcurious-backend.herokuapp.com/users/notifications`,
         {
           method: "get",
           headers: {
@@ -29,7 +29,7 @@ const NotificationPage = () => {
 
   //Handle NotificationClick
   const handleNotificationClick = async (id) => {
-    await fetch(`http://localhost:4000/users/marknotificationread/${id}`, {
+    await fetch(`https://imcurious-backend.herokuapp.com/users/marknotificationread/${id}`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",

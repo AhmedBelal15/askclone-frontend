@@ -31,7 +31,7 @@ const UserPage = () => {
     e.preventDefault();
     if (question === "") return;
     const response = await fetch(
-      `http://localhost:4000/questions/askquestion/${profileId}`,
+      `https://imcurious-backend.herokuapp.com/questions/askquestion/${profileId}`,
       {
         method: "post",
         headers: {
@@ -57,7 +57,7 @@ const UserPage = () => {
   //Fetching user data
   useEffect(()=>{
     (async function(){
-      const userResponse = await fetch(`http://localhost:4000/user/getuserandimage/${profileId}`, {
+      const userResponse = await fetch(`https://imcurious-backend.herokuapp.com/user/getuserandimage/${profileId}`, {
         method: 'get',
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const UserPage = () => {
         var userImage = userData.user_image;
       }
       const userName = userData.user_name
-      setUserData({userName,imagePath: `http://localhost:4000/${userImage}`,isFollowed: true})
+      setUserData({userName,imagePath: `https://imcurious-backend.herokuapp.com/${userImage}`,isFollowed: true})
     })()
   }, [])
 
@@ -80,7 +80,7 @@ const UserPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/questions/getanswers/${profileId}`,
+        `https://imcurious-backend.herokuapp.com/questions/getanswers/${profileId}`,
         {
           method: "get",
           headers: {

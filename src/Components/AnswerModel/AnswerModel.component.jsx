@@ -39,7 +39,7 @@ const AnswerModel = ({
     //handleLike
     if (!like) {
       const response = await fetch(
-        `http://localhost:4000/questions/addlike/${questionId}`,
+        `https://imcurious-backend.herokuapp.com/questions/addlike/${questionId}`,
         {
           method: "put",
           headers: {
@@ -57,7 +57,7 @@ const AnswerModel = ({
       }
     } else {
       const response = await fetch(
-        `http://localhost:4000/questions/removelike/${questionId}`,
+        `https://imcurious-backend.herokuapp.com/questions/removelike/${questionId}`,
         {
           method: "put",
           headers: {
@@ -91,7 +91,7 @@ const AnswerModel = ({
         <div className="author" style={{ display: visible }}>
           <span
             style={{
-              backgroundImage: `url('http://localhost:4000/${userImage}')`,
+              backgroundImage: `url('https://imcurious-backend.herokuapp.com/${userImage}')`,
             }}
             alt="user-image"
             className="answer-image"
@@ -108,7 +108,7 @@ const AnswerModel = ({
       </Link>
       <article className="answer">{answer}</article>
       {image ? (
-        <img src={`http://localhost:4000/${image}`} alt="answer" />
+        <img src={`https://imcurious-backend.herokuapp.com/${image}`} alt="answer" />
       ) : null}
       <div className="answer-likes">
         <Heart

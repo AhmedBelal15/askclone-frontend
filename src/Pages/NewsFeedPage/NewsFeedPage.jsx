@@ -11,7 +11,7 @@ const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
 const userId = JSON.parse(localStorage.getItem('userId'))
 useEffect(()=>{
   (async function(){
-    const response = await fetch(`http://localhost:4000/newsfeed`, {
+    const response = await fetch(`https://imcurious-backend.herokuapp.com/newsfeed`, {
       method: 'get',
       headers: {
         "Content-Type": "application/json",

@@ -17,7 +17,7 @@ const GetAnswerPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/questions/getoneanswer/${questionId}`,
+        `https://imcurious-backend.herokuapp.com/questions/getoneanswer/${questionId}`,
         {
           method: "get",
           headers: {
@@ -43,7 +43,7 @@ const GetAnswerPage = () => {
 //   //handleLike
 //   if (!likeStatus) {
 //     const response = await fetch(
-//       `http://localhost:4000/questions/addlike/${questionId}`,
+//       `https://imcurious-backend.herokuapp.com/questions/addlike/${questionId}`,
 //       {
 //         method: "put",
 //         headers: {
@@ -61,7 +61,7 @@ const GetAnswerPage = () => {
 //     }
 //   } else {
 //     const response = await fetch(
-//       `http://localhost:4000/questions/removelike/${questionId}`,
+//       `https://imcurious-backend.herokuapp.com/questions/removelike/${questionId}`,
 //       {
 //         method: "put",
 //         headers: {

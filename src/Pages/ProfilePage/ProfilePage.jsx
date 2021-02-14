@@ -28,7 +28,7 @@ const ProfilePage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        "http://localhost:4000/questions/getyouranswers",
+        "https://imcurious-backend.herokuapp.com/questions/getyouranswers",
         {
           method: "get",
           headers: {
@@ -55,7 +55,7 @@ const ProfilePage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/user/getuserandimage/${userId}`,
+        `https://imcurious-backend.herokuapp.com/user/getuserandimage/${userId}`,
         {
           method: "get",
           headers: {
@@ -85,7 +85,7 @@ const ProfilePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;
-    const response = await fetch("http://localhost:4000/question/askyourself", {
+    const response = await fetch("https://imcurious-backend.herokuapp.com/question/askyourself", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const ProfilePage = () => {
       )
     ) {
       try {
-        await fetch(`http://localhost:4000/questions/removeAnswer/${id}`, {
+        await fetch(`https://imcurious-backend.herokuapp.com/questions/removeAnswer/${id}`, {
           method: "delete",
           headers: {
             "Content-Type": "application/json",
@@ -141,12 +141,12 @@ const ProfilePage = () => {
       <div className="profile-page-container">
         <div className="reverse-row">
           <ProfileBoxHeader
-            image={`http://localhost:4000/${userData.userImage}`}
+            image={`https://imcurious-backend.herokuapp.com/${userData.userImage}`}
             isFollowVisible="none"
             profilename={userData.userName}
           />
 
-          <CopyToClipboard text={`http://localhost:3000/user/${userId}`}>
+          <CopyToClipboard text={`https://imcurious-react.herokuapp.com/user/${userId}`}>
             <div className="copy-div" title="Copy Profile Link"></div>
           </CopyToClipboard>
         </div>

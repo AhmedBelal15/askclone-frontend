@@ -16,7 +16,7 @@ const NewPasswordPage = () => {
       return alert("Passwords don't match");
     }
     const response = await fetch(
-      `http://localhost:4000/auth/updatepassword/${resetToken}`,
+      `https://imcurious-backend.herokuapp.com/auth/updatepassword/${resetToken}`,
       {
         method: "put",
         headers: { "Content-Type": "application/json" },

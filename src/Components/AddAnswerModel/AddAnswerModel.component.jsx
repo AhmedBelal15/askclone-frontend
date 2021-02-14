@@ -15,7 +15,7 @@ const AddAnswerModel = ({
     const formData = new FormData()
     formData.append('image', event.target.files[0])
 
-    const response = await fetch('http://localhost:4000/upload/image', {
+    const response = await fetch('https://imcurious-backend.herokuapp.com/upload/image', {
     method: 'post',
     headers: {
       "access-token": `Bearer ${accessToken}`,

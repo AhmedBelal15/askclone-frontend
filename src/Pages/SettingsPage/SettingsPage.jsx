@@ -24,7 +24,7 @@ const SettingsPage = () => {
 
   useEffect(() => {
     (async function () {
-      const response = await fetch("http://localhost:4000/user/getsettings", {
+      const response = await fetch("https://imcurious-backend.herokuapp.com/user/getsettings", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const SettingsPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/user/settings", {
+    const response = await fetch("https://imcurious-backend.herokuapp.com/user/settings", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const SettingsPage = () => {
   const handleImageUpload = async (e) => {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    const response = await fetch("http://localhost:4000/upload/image", {
+    const response = await fetch("https://imcurious-backend.herokuapp.com/upload/image", {
       method: "post",
       headers: {
         "access-token": `Bearer ${accessToken}`,
@@ -204,7 +204,7 @@ const SettingsPage = () => {
           </div>
           {settings.imagePath ? (
             <img
-              src={`http://localhost:4000/${settings.imagePath}`}
+              src={`https://imcurious-backend.herokuapp.com/${settings.imagePath}`}
               alt="profile"
               className="settings-profile-image"
             />

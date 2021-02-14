@@ -15,7 +15,7 @@ const ProfileBoxHeader = ({ image, isFollowVisible, profilename }) => {
     if(isFollowVisible === 'none'){return}
     (async function () {
       const response = await fetch(
-        `http://localhost:4000/checkfollow/${userId}`,
+        `https://imcurious-backend.herokuapp.com/checkfollow/${userId}`,
         {
           method: "get",
           headers: {
@@ -41,7 +41,7 @@ const ProfileBoxHeader = ({ image, isFollowVisible, profilename }) => {
   //handle Following/ Unfollowing
   const handleClick = async () => {
     if (followed) {
-      const response = await fetch(`http://localhost:4000/unfollow/${userId}`, {
+      const response = await fetch(`https://imcurious-backend.herokuapp.com/unfollow/${userId}`, {
         method: "delete",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const ProfileBoxHeader = ({ image, isFollowVisible, profilename }) => {
         setFollowed(false);
       }
     } else {
-      const response = await fetch(`http://localhost:4000/follow/${userId}`, {
+      const response = await fetch(`https://imcurious-backend.herokuapp.com/follow/${userId}`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
