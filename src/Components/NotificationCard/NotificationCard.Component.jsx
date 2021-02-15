@@ -9,7 +9,7 @@ const NotificationCard = ({notificationType, notificationSenderName, notificatio
     notificationSender = '#'
   }
   const imageStyle = {
-    background: `url('https://imcurious-backend.herokuapp.com/${notificationSenderImage}')`,
+    background: `url('http://localhost:4000/${notificationSenderImage}')`,
     backgroundPosition: "center",
     backgroundSize: "cover",
   };

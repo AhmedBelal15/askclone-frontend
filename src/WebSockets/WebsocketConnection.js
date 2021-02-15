@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 import toast from 'react-hot-toast';
 
 const notify = (message) => toast(message);
-const socket = io('https://imcurious-backend.herokuapp.com')
+const socket = io('http://localhost:4000')
 
 
 // socket.on('disconnect', )

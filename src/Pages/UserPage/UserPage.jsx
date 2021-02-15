@@ -5,33 +5,39 @@ import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component.jsx"
 import { useParams, useHistory } from "react-router-dom";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import { Helmet } from "react-helmet";
-import tokensRefresher from '../../helpers/tokensRefresher'
+import tokensRefresher from "../../helpers/tokensRefresher";
 import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader.component.jsx";
-import useStore from '../../Zustand/AuthZustand'
+import useStore from "../../Zustand/AuthZustand";
+import RedirectToHome from "../../helpers/redirectToHome.js";
 import "../ProfilePage/profile-page.style.css";
 
 const UserPage = () => {
+  //if not logged in
+  RedirectToHome();
+
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [userData, setUserData] = useState({
-    userName:'',
-    imagePath: '',
+    userName: "",
+    imagePath: "",
     isFollowed: true,
-  })
+  });
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-  const Logout = useStore(state => state.setLogout)
+  const Logout = useStore((state) => state.setLogout);
   const profileId = useParams().id;
-  const history = useHistory()
-  if(profileId === JSON.parse(localStorage.getItem('userId'))){history.push('/profile')}
+  const history = useHistory();
+  if (profileId === JSON.parse(localStorage.getItem("userId"))) {
+    history.push("/profile");
+  }
 
   //handleSubmit for Asking a Question
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;
     const response = await fetch(
-      `https://imcurious-backend.herokuapp.com/questions/askquestion/${profileId}`,
+      `http://localhost:4000/questions/askquestion/${profileId}`,
       {
         method: "post",
         headers: {
@@ -46,7 +52,7 @@ const UserPage = () => {
       }
     );
     const data = await response.json();
-    tokensRefresher(data)
+    tokensRefresher(data);
     setQuestion("");
 
     if (data[1] !== undefined) {
@@ -55,32 +61,38 @@ const UserPage = () => {
   };
 
   //Fetching user data
-  useEffect(()=>{
-    (async function(){
-      const userResponse = await fetch(`https://imcurious-backend.herokuapp.com/user/getuserandimage/${profileId}`, {
-        method: 'get',
-        headers: {
-          "Content-Type": "application/json",
-          "access-token": `Bearer ${accessToken}`,
-          "refresh-token": refreshToken,
+  useEffect(() => {
+    (async function () {
+      const userResponse = await fetch(
+        `http://localhost:4000/user/getuserandimage/${profileId}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
         }
-      })
-      const userData = (await userResponse.json()).payload[0]
-      if(userData.user_image != null){
+      );
+      const userData = (await userResponse.json()).payload[0];
+      if (userData.user_image != null) {
         var userImage = userData.user_image;
       }
-      const userName = userData.user_name
-      setUserData({userName,imagePath: `https://imcurious-backend.herokuapp.com/${userImage}`,isFollowed: true})
-    })()
-  }, [])
-
+      const userName = userData.user_name;
+      setUserData({
+        userName,
+        imagePath: `http://localhost:4000/${userImage}`,
+        isFollowed: true,
+      });
+    })();
+  }, []);
 
   //Fetching user Answers
-  let isMounted = true
+  let isMounted = true;
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/questions/getanswers/${profileId}`,
+        `http://localhost:4000/questions/getanswers/${profileId}`,
         {
           method: "get",
           headers: {
@@ -91,17 +103,21 @@ const UserPage = () => {
         }
       );
       const data = await response.json();
-      setAnswers(data.payload)
-      tokensRefresher(data)
+      setAnswers(data.payload);
+      tokensRefresher(data);
       if (response.status === 400) return;
-      if(response.status === 401){
-        localStorage.clear()
-        Logout()
-    }
-        if(isMounted){setAnswers(data.payload);}
+      if (response.status === 401) {
+        localStorage.clear();
+        Logout();
+      }
+      if (isMounted) {
+        setAnswers(data.payload);
+      }
     })();
     //preventing memory leak
-    return()=> {isMounted = false}
+    return () => {
+      isMounted = false;
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -114,9 +130,9 @@ const UserPage = () => {
       <HomePageNav />
       <div className="profile-page-container">
         <ProfileBoxHeader
-        profilename = {userData.userName}
-        image = {userData.imagePath}
-        isFollowed = {userData.isFollowed}
+          profilename={userData.userName}
+          image={userData.imagePath}
+          isFollowed={userData.isFollowed}
         />
         <AddQuestion
           question={question}
@@ -130,18 +146,18 @@ const UserPage = () => {
             return (
               <div key={answer.question_id}>
                 <AnswerModel
-                question={answer.question}
-                answeredDate={answer.answered_date}
-                answer={answer.answer}
-                isAnonymous={answer.is_anonymous}
-                likedBy={answer.liked_by}
-                numberOfLikes={answer.liked_by? answer.liked_by.length : 0}
-                questionId={answer.question_id}
-                image={answer.answer_image}
-                senderId = {answer.sender_id}
-                userName={answer.user_name}
-                userImage={answer.user_image}
-                deleteHidden={true}
+                  question={answer.question}
+                  answeredDate={answer.answered_date}
+                  answer={answer.answer}
+                  isAnonymous={answer.is_anonymous}
+                  likedBy={answer.liked_by}
+                  numberOfLikes={answer.liked_by ? answer.liked_by.length : 0}
+                  questionId={answer.question_id}
+                  image={answer.answer_image}
+                  senderId={answer.sender_id}
+                  userName={answer.user_name}
+                  userImage={answer.user_image}
+                  deleteHidden={true}
                 />
               </div>
             );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
+import RedirectToHome from "../../helpers/redirectToHome";
 import tokensRefresher from "../../helpers/tokensRefresher";
 import useStore from "../../Zustand/AuthZustand";
 import "./settings-page.style.css";
@@ -15,7 +16,9 @@ const SettingsPage = () => {
     gender: "",
     imagePath: null,
   });
-  console.log(settings);
+    //if not logged in
+    RedirectToHome()
+    
   const { name, location, email, bio, birthday, gender, imagePath } = settings;
   const history = useHistory();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -24,7 +27,7 @@ const SettingsPage = () => {
 
   useEffect(() => {
     (async function () {
-      const response = await fetch("https://imcurious-backend.herokuapp.com/user/getsettings", {
+      const response = await fetch("http://localhost:4000/user/getsettings", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +60,7 @@ const SettingsPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://imcurious-backend.herokuapp.com/user/settings", {
+    const response = await fetch("http://localhost:4000/user/settings", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +88,7 @@ const SettingsPage = () => {
   const handleImageUpload = async (e) => {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    const response = await fetch("https://imcurious-backend.herokuapp.com/upload/image", {
+    const response = await fetch("http://localhost:4000/upload/image", {
       method: "post",
       headers: {
         "access-token": `Bearer ${accessToken}`,
@@ -204,7 +207,7 @@ const SettingsPage = () => {
           </div>
           {settings.imagePath ? (
             <img
-              src={`https://imcurious-backend.herokuapp.com/${settings.imagePath}`}
+              src={`http://localhost:4000/${settings.imagePath}`}
               alt="profile"
               className="settings-profile-image"
             />

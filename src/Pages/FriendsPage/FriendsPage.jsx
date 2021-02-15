@@ -3,9 +3,13 @@ import { Helmet } from "react-helmet";
 import FollowedUserCard from "../../Components/FollowedUserCard/FollowedUserCard.Component";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
+import RedirectToHome from "../../helpers/redirectToHome";
 import "./friends-page.style.css";
 
 const FriendsPage = () => {
+    //if not logged in
+    RedirectToHome()
+    
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   const [userData, setUserData] = useState({
@@ -15,7 +19,7 @@ const FriendsPage = () => {
   });
   useEffect(() => {
     (async function () {
-      const response = await fetch("https://imcurious-backend.herokuapp.com/getfollowing", {
+      const response = await fetch("http://localhost:4000/getfollowing", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +28,6 @@ const FriendsPage = () => {
         },
       });
       const data = (await response.json()).payload;
-      console.log(data);
       setUserData(data)
     })();
   }, []);

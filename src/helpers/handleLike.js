@@ -11,7 +11,7 @@ const handleLike = async (
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
   if (!likeStatus) {
     const response = await fetch(
-      `https://imcurious-backend.herokuapp.com/questions/addlike/${questionId}`,
+      `http://localhost:4000/questions/addlike/${questionId}`,
       {
         method: "put",
         headers: {
@@ -29,7 +29,7 @@ const handleLike = async (
     }
   } else {
     const response = await fetch(
-      `https://imcurious-backend.herokuapp.com/questions/removelike/${questionId}`,
+      `http://localhost:4000/questions/removelike/${questionId}`,
       {
         method: "put",
         headers: {

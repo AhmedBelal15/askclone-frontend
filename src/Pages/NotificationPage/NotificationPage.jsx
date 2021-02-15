@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import Helmet from "react-helmet";
-import "./notification-page.style.css";
+import RedirectToHome from "../../helpers/redirectToHome";
 import NotificationCard from "../../Components/NotificationCard/NotificationCard.Component";
+import "./notification-page.style.css";
 
 const NotificationPage = () => {
+  //if not logged in
+  RedirectToHome();
+
   const [notifications, setNotifications] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
@@ -12,7 +16,7 @@ const NotificationPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/users/notifications`,
+        `http://localhost:4000/users/notifications`,
         {
           method: "get",
           headers: {
@@ -29,7 +33,7 @@ const NotificationPage = () => {
 
   //Handle NotificationClick
   const handleNotificationClick = async (id) => {
-    await fetch(`https://imcurious-backend.herokuapp.com/users/marknotificationread/${id}`, {
+    await fetch(`http://localhost:4000/users/marknotificationread/${id}`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",

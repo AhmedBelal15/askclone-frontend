@@ -10,7 +10,7 @@ const LogoutPopup = ({ isVisible, handleVisibility }) => {
     localStorage.clear();
     setLogout();
     socket.disconnect();
-    fetch("https://imcurious-backend.herokuapp.com/auth/logout", {
+    fetch("http://localhost:4000/auth/logout", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

@@ -3,20 +3,24 @@ import HomePageNav from "../../Components/HomePageNav/HomePageNav.Component";
 import NoDataCard from "../../Components/NoDataCard/NoDataCard.component";
 import QuestionModel from "../../Components/QuestionModel/QuestionModel.Component";
 import { Helmet } from "react-helmet";
-import tokensRefresher from '../../helpers/tokensRefresher'
-import useStore from '../../Zustand/AuthZustand'
+import tokensRefresher from "../../helpers/tokensRefresher";
+import useStore from "../../Zustand/AuthZustand";
+import RedirectToHome from "../../helpers/redirectToHome";
 import "./questions-page.style.css";
 
 const QuestionsPage = () => {
+  //if not logged in
+  RedirectToHome();
+
   const [questions, setQuestions] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-  const Logout = useStore(state => state.setLogout)
+  const Logout = useStore((state) => state.setLogout);
 
   //handle delete function
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://imcurious-backend.herokuapp.com/questions/deletequestion/${id}`, {
+      await fetch(`http://localhost:4000/questions/deletequestion/${id}`, {
         method: "delete",
         headers: {
           "Content-Type": "application/json",
@@ -34,11 +38,11 @@ const QuestionsPage = () => {
   };
 
   //fetching user questions
-  let isMounted = true
+  let isMounted = true;
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        "https://imcurious-backend.herokuapp.com/questions/getquestions",
+        "http://localhost:4000/questions/getquestions",
         {
           method: "get",
           headers: {
@@ -49,16 +53,18 @@ const QuestionsPage = () => {
         }
       );
       const data = await response.json();
-      if(response.status === 400)return
-      if(response.status === 401){
-        localStorage.clear()
-        Logout()
-    }
-      if(data.payload != undefined && isMounted) {setQuestions([...data.payload]);}
-      tokensRefresher(data)
+      if (response.status === 400) return;
+      if (response.status === 401) {
+        localStorage.clear();
+        Logout();
+      }
+      if (data.payload != undefined && isMounted) {
+        setQuestions([...data.payload]);
+      }
+      tokensRefresher(data);
     })();
     // eslint-disable-next-line
-    return ()=> isMounted=false
+    return () => (isMounted = false);
   }, []);
   return (
     <>

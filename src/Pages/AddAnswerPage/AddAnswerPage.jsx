@@ -8,7 +8,10 @@ import tokensRefresher from "../../helpers/tokensRefresher";
 import useStore from '../../Zustand/AuthZustand'
 
 import "./add-answer-page.style.css";
+import RedirectToHome from "../../helpers/redirectToHome";
 const AddAnswerPage = () => {
+  //if not logged in
+  RedirectToHome()
   //state
   const [answer, setAnswer] = useState('');
   const [questionData, setQuestionData] = useState({
@@ -27,7 +30,7 @@ const AddAnswerPage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/questions/getquestion/${questionId}`,
+        `http://localhost:4000/questions/getquestion/${questionId}`,
         {
           method: "get",
           headers: {
@@ -55,7 +58,7 @@ const AddAnswerPage = () => {
     e.preventDefault();
     if (answer.text === "") return;
     const response = await fetch(
-      `https://imcurious-backend.herokuapp.com/questions/addanswer/${questionId}`,
+      `http://localhost:4000/questions/addanswer/${questionId}`,
       {
         method: "put",
         headers: {

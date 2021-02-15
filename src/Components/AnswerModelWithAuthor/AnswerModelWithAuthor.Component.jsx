@@ -31,7 +31,7 @@ const AnswerModelWithAuthor = ({
         <div className="author" style={{ display: visible }}>
           <span
             style={{
-              backgroundImage: `url('https://imcurious-backend.herokuapp.com/${questionerImage}')`,
+              backgroundImage: `url('http://localhost:4000/${questionerImage}')`,
             }}
             className="answer-image"
           ></span>
@@ -49,7 +49,7 @@ const AnswerModelWithAuthor = ({
         <span
           className="author-image"
           style={{
-            backgroundImage: `url("https://imcurious-backend.herokuapp.com/${authorImage}")`,
+            backgroundImage: `url("http://localhost:4000/${authorImage}")`,
             backgroundPosition: 'center',
             backgroundSize: "cover",
           }}
@@ -60,7 +60,7 @@ const AnswerModelWithAuthor = ({
       </div>
       <article className="answer">{answer}</article>
       {answerImage ? (
-        <img src={`https://imcurious-backend.herokuapp.com/${answerImage}`} alt="answer" />
+        <img src={`http://localhost:4000/${answerImage}`} alt="answer" />
       ) : null}
       <div className="answer-likes">
         <Heart

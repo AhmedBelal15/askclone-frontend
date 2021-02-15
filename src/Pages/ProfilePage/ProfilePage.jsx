@@ -9,8 +9,12 @@ import ProfileBoxHeader from "../../Components/ProfileBoxHeader/ProfileBoxHeader
 import tokensRefresher from "../../helpers/tokensRefresher";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./profile-page.style.css";
+import RedirectToHome from "../../helpers/redirectToHome.js";
 
 const ProfilePage = () => {
+  //if not logged in
+  RedirectToHome();
+
   const [question, setQuestion] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -28,7 +32,7 @@ const ProfilePage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        "https://imcurious-backend.herokuapp.com/questions/getyouranswers",
+        "http://localhost:4000/questions/getyouranswers",
         {
           method: "get",
           headers: {
@@ -55,7 +59,7 @@ const ProfilePage = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/user/getuserandimage/${userId}`,
+        `http://localhost:4000/user/getuserandimage/${userId}`,
         {
           method: "get",
           headers: {
@@ -85,7 +89,7 @@ const ProfilePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (question === "") return;
-    const response = await fetch("https://imcurious-backend.herokuapp.com/question/askyourself", {
+    const response = await fetch("http://localhost:4000/question/askyourself", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +114,7 @@ const ProfilePage = () => {
       )
     ) {
       try {
-        await fetch(`https://imcurious-backend.herokuapp.com/questions/removeAnswer/${id}`, {
+        await fetch(`http://localhost:4000/questions/removeAnswer/${id}`, {
           method: "delete",
           headers: {
             "Content-Type": "application/json",
@@ -141,12 +145,14 @@ const ProfilePage = () => {
       <div className="profile-page-container">
         <div className="reverse-row">
           <ProfileBoxHeader
-            image={`https://imcurious-backend.herokuapp.com/${userData.userImage}`}
+            image={`http://localhost:4000/${userData.userImage}`}
             isFollowVisible="none"
             profilename={userData.userName}
           />
 
-          <CopyToClipboard text={`https://imcurious-react.herokuapp.com/user/${userId}`}>
+          <CopyToClipboard
+            text={`https://imcurious-react.herokuapp.com/user/${userId}`}
+          >
             <div className="copy-div" title="Copy Profile Link"></div>
           </CopyToClipboard>
         </div>

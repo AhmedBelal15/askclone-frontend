@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/auth/verifyemail/${verifyToken}`,
+        `http://localhost:4000/auth/verifyemail/${verifyToken}`,
         {
           method: "put",
           headers: {

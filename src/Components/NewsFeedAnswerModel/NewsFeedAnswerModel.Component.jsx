@@ -30,7 +30,7 @@ const NewsFeedAnswerModel = ({
   useEffect(() => {
     (async function () {
       const response = await fetch(
-        `https://imcurious-backend.herokuapp.com/user/getuserandimage/${recieverId}`,
+        `http://localhost:4000/user/getuserandimage/${recieverId}`,
         {
           method: "get",
           headers: {
@@ -59,7 +59,7 @@ const NewsFeedAnswerModel = ({
         <div className="author" style={{ display: visible }}>
           <span
             style={{
-              backgroundImage: `url('https://imcurious-backend.herokuapp.com/${questionerImage}')`,
+              backgroundImage: `url('http://localhost:4000/${questionerImage}')`,
             }}
             className="answer-image"
           ></span>
@@ -78,7 +78,7 @@ const NewsFeedAnswerModel = ({
         <span
           className="author-image"
           style={{
-            backgroundImage: `url("https://imcurious-backend.herokuapp.com/${userData.userImage}")`,
+            backgroundImage: `url("http://localhost:4000/${userData.userImage}")`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -89,7 +89,7 @@ const NewsFeedAnswerModel = ({
       </div>
       <article className="answer">{answer}</article>
       {answerImage ? (
-        <img src={`https://imcurious-backend.herokuapp.com/${answerImage}`} alt="answer" />
+        <img src={`http://localhost:4000/${answerImage}`} alt="answer" />
       ) : null}
       <div className="answer-likes">
         <Heart

@@ -17,7 +17,7 @@ const RegisterPage = () => {
       return alert("Please make sure that passwords are identical!");
     }
 
-    const response = await fetch("https://imcurious-backend.herokuapp.com/auth/register", {
+    const response = await fetch("http://localhost:4000/auth/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
